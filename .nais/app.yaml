@@ -1,0 +1,16 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: loggkamel-proxy
+  namespace: sikkerhetstjenesten
+spec:
+  ingresses:
+    - https://loggkamel-proxy.dev-fss.nav.cloud.nais.io
+  port: 8080
+  replicas:
+    max: 2
+    min: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 32Mi
