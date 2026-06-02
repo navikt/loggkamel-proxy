@@ -1,9 +1,6 @@
 FROM busybox:latest
 ENV PORT=8080
 
-ADD ./www/index.html /www/index.html
-ADD ./www/hello-nais.png /www/hello-nais.png
-
 HEALTHCHECK CMD nc -z localhost $PORT
 
 # Create a basic webserver and run it until the container is stopped
