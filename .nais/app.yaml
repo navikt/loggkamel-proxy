@@ -5,7 +5,7 @@ metadata:
   namespace: sikkerhetstjenesten
 spec:
   ingresses:
-    - https://loggkamel-proxy.dev-fss.nav.cloud.nais.io
+    - https://loggkamel-proxy.dev.intern.nav.no
   port: 8080
   replicas:
     max: 2
