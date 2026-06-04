@@ -7,8 +7,8 @@ plugins {
 }
 
 application {
-	mainClass.set("no.nav.sikkerhetstjenesten.loggkamelproxy.LoggkamelProxy")
-	applicationName = "loggkamel-proxy"
+	mainClass.set("no.nav.sikkerhetstjenesten.loggkamelproxy.LoggkamelProxyKt")
+	applicationName = "app"
 }
 
 kotlin {
