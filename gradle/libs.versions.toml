@@ -1,0 +1,53 @@
+[versions]
+kotlin = "2.3.21"
+ktor = "3.5.0"
+logback = "1.5.33"
+logstash = "9.0"
+junit-bom = "6.1.0"
+spring-boot = "4.0.6"
+spring-dependency = "1.1.7"
+swagger = "3.0.3"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin"}
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency = { id = "io.spring.dependency-management", version.ref = "spring-dependency" }
+
+[libraries]
+ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
+ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
+ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit-bom" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+logstash = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash" }
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" , version.ref = "spring-boot" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+spring-doc-openapi = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui" , version.ref = "swagger" }
+
+[bundles]
+ktor = [
+    "ktor-server-core",
+    "ktor-server-netty",
+]
+logging = [
+    "logback",
+    "logstash"
+]
+springboot = [
+    "spring-boot-starter-web"
+]
+kotlin = [
+    "kotlin-reflect"
+]
+openapi = [
+    "spring-doc-openapi"
+]
+
+test = [
+    "ktor-server-test-host",
+    "junit-jupiter",
+    "junit-platform-launcher"
+]

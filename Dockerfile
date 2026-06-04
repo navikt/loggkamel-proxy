@@ -1,7 +1,7 @@
-FROM busybox:latest
-ENV PORT=8080
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/jre:openjdk-25
 
-HEALTHCHECK CMD nc -z localhost $PORT
+WORKDIR /app
 
-# Create a basic webserver and run it until the container is stopped
-CMD echo "httpd started" && trap "exit 0;" TERM INT; httpd -v -p $PORT -h /www -f & wait
+COPY build/install/app/ /app/
+
+ENTRYPOINT ["java", "-cp", "/app/lib/*", "no.nav.sikkerhetstjenesten.loggkamelproxy.LoggkamelProxyKt"]
