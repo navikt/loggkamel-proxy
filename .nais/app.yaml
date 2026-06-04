@@ -13,8 +13,8 @@ spec:
     min: 1
   resources:
     requests:
-      cpu: 50m
-      memory: 32Mi
+      cpu: 20m
+      memory: 640Mi
   observability:
     logging:
       destinations:
