@@ -58,4 +58,4 @@ jobs:
         env:
           RESOURCE: .nais/app.yaml
           CLUSTER: dev-fss
-          IMAGE: ${{ steps.docker-push.outputs.image }}
+          IMAGE: ${{ needs.test-build-deploy.outputs.image }}
