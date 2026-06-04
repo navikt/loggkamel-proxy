@@ -1,46 +1,37 @@
 plugins {
-	kotlin("jvm") version "2.2.21"
-	kotlin("plugin.spring") version "2.2.21"
-	id("org.springframework.boot") version "4.0.6"
-	id("io.spring.dependency-management") version "1.1.7"
+	alias(libs.plugins.kotlin.jvm)
+	alias(libs.plugins.kotlin.spring)
+	alias(libs.plugins.spring.boot)
+	alias(libs.plugins.spring.dependency)
+	application
 }
 
-group = "com.github.navikt"
-version = properties["version"] ?: "local-build"
-
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
-}
-
-repositories {
-	mavenCentral()
-	maven {
-		url = uri("https://maven.pkg.github.com/navikt/maven-release")
-		credentials {
-			username = System.getenv("GITHUB_USERNAME")
-			password = System.getenv("GITHUB_PASSWORD")
-		}
-	}
-	maven("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
-}
-
-dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.3")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+application {
+	mainClass.set("no.nav.sikkerhetstjenesten.loggkamelproxy.LoggkamelProxy")
+	applicationName = "loggkamel-proxy"
 }
 
 kotlin {
-	compilerOptions {
-		freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
-	}
+	jvmToolchain(25)
 }
 
-tasks.withType<Test> {
-	useJUnitPlatform()
+dependencies {
+	implementation(libs.bundles.ktor)
+	implementation(libs.bundles.logging)
+
+	implementation(libs.bundles.springboot)
+	implementation(libs.bundles.kotlin)
+	implementation(libs.bundles.openapi)
+
+	testImplementation(platform(libs.junit.bom))
+	testImplementation(libs.bundles.test)
+}
+
+tasks {
+	withType<Test> {
+		useJUnitPlatform()
+		testLogging {
+			showExceptions = true
+		}
+	}
 }

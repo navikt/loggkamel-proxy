@@ -6,6 +6,7 @@ metadata:
 spec:
   ingresses:
     - https://loggkamel-proxy.dev.intern.nav.no
+  image: {{image}}
   port: 8080
   replicas:
     max: 2
@@ -14,3 +15,7 @@ spec:
     requests:
       cpu: 50m
       memory: 32Mi
+  observability:
+    logging:
+      destinations:
+        - id: loki

@@ -1,34 +1,61 @@
-name: Build and deploy
+name: Build and deploy main
 on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "*.md"
 jobs:
-  build_and_deploy:
-    name: Build, push and deploy
-    runs-on: ubuntu-latest
+  test-build-deploy:
     permissions:
-      contents: read
-      id-token: write
-      actions: read
+      actions: read # for sarif
+      contents: write # for dependency graph & sarif
+      security-events: write # push sarif to github security
+      id-token: write # for nais docker-build-push
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.docker-push.outputs.image }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          fetch-depth: 0 # Fetch all history for what-changed action
-      - name: Determine what to do
-        id: changed-files
-        uses: "nais/what-changed@main"
+          persist-credentials: false
+      - uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
         with:
-          files: .nais/app.yaml
-      - name: Build and push image and SBOM to OCI registry
-        if: steps.changed-files.outputs.changed != 'only-inputs'
-        uses: nais/docker-build-push@v0
-        id: docker-build-push
+          java-version: 25
+          distribution: temurin
+      - uses: gradle/actions/setup-gradle@50e97c2cd7a37755bbfafc9c5b7cafaece252f6e # v6.1.0
+      - name: Test & build
+        run: ./gradlew test installDist
+      - name: Build & push docker image + SBOM
+        uses: nais/docker-build-push@751a312f0803eb96a05a41fadf51be19b7be362c
+        id: docker-push
         with:
           team: sikkerhetstjenesten
-      - name: Deploy to Nais
-        uses: nais/deploy/actions/deploy@v2
-        env:
-          CLUSTER: dev-fss
-          RESOURCE: .nais/app.yaml
-          WORKLOAD_IMAGE: ${{ steps.docker-build-push.outputs.image }}
+          pull: true
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@50e97c2cd7a37755bbfafc9c5b7cafaece252f6e # v6.1.0
+      - name: Scan docker image for secrets
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: '${{ steps.docker-push.outputs.image }}'
+          format: 'sarif'
+          scanners: 'secret'
+          output: 'trivy.sarif'
+      - uses: github/codeql-action/upload-sarif@7211b7c8077ea37d8641b6271f6a365a22a5fbfa # v4.36.0
+        with:
+          sarif_file: 'trivy.sarif'
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+        contents: read
+        id-token: write
+    needs: test-build-deploy
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      #- uses: nais/deploy/actions/deploy@7c152a10f4da3ca352d57a25eba0b3a8e04882f9 # TODO: To deploy, uncomment this and make appropriate changes
+      #  env:
+      #    RESOURCE: .nais/nais.yaml
+      #    CLUSTER: prod-gcp
+      #    IMAGE: ${{ needs.test-build-deploy.outputs.image }}
