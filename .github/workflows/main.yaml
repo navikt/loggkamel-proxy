@@ -56,6 +56,8 @@ jobs:
           persist-credentials: false
       - uses: nais/deploy/actions/deploy@7c152a10f4da3ca352d57a25eba0b3a8e04882f9
         env:
+          PRINT_PAYLOAD: true
           RESOURCE: .nais/naiserator.yaml
           CLUSTER: dev-fss #TODO: add "prod-fss" for prod deployment
           IMAGE: ${{ needs.test-build-deploy.outputs.image }}
+          VARS: .nais/${{matrix.cluster}}.json
