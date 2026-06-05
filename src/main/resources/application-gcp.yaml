@@ -1,0 +1,33 @@
+management:
+  info:
+    git:
+      mode: simple
+  observations:
+    annotations:
+      enabled: true
+  health:
+    ssl:
+      enabled: false
+    ping:
+      enabled: false
+    diskspace:
+      enabled: false
+  endpoints:
+    web:
+      base-path: /monitoring
+      exposure:
+        include: health,info,prometheus
+
+spring:
+  threads:
+    virtual:
+      enabled: true
+  application:
+    name: loggkamel-proxy
+
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: ${azure.app.client.id}
+    csrf:
+      enabled: true

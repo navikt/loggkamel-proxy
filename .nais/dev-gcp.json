@@ -1,0 +1,29 @@
+{
+  "ingresses": [
+    "https://loggkamel-proxy.dev.intern.nav.no"
+  ],
+  "inbound": [
+    {
+      "name": "azure-token-generator",
+      "namespace": "nais",
+      "cluster": "dev-fss"
+    }
+  ],
+  "nais": {
+    "cluster": {
+      "plan" : "startup-4",
+      "type": "dev"
+    }
+  },
+  "mem": {
+    "min": "32Mi",
+    "max": "640Mi"
+  },
+  "cpu": {
+    "min": "20m"
+  },
+  "replica": {
+    "min": 1,
+    "max": 2
+  }
+}
