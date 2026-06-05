@@ -52,7 +52,7 @@ jobs:
     needs: test-build-deploy
     strategy:
       matrix:
-        cluster: [ dev-gcp, prod-gcp ]
+        cluster: [ dev-fss ] #TODO: add prod-fss for prod deployment
     name: Deploy to ${{ matrix.cluster }}
     environment: ${{ matrix.cluster }}:sikkerhetstjenesten
     steps:
@@ -63,6 +63,6 @@ jobs:
         env:
           PRINT_PAYLOAD: true
           RESOURCE: .nais/naiserator.yaml
-          CLUSTER: dev-fss #TODO: add "prod-fss" for prod deployment
+          CLUSTER: ${{ matrix.cluster }}
           IMAGE: ${{ needs.test-build-deploy.outputs.image }}
           VARS: .nais/${{matrix.cluster}}.json
