@@ -18,7 +18,7 @@ class RequestAuthenticationDecider(
         authenticationHeader: String?
     ): Boolean {
         //TODO: only for local development, remove before merging
-        println("Authentication header is: $authenticationHeader")
+        log.info("Authentication header is: $authenticationHeader")
 
         if (authenticationHeader == null || !authenticationHeader.startsWith("Bearer ")) {
             log.info("Authentication attempted with missing or misformatted header")

@@ -19,7 +19,6 @@ class WebSecurityConfig(
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http {
-            csrf { disable() }
             formLogin { disable() }
             httpBasic { disable() }
             addFilterBefore<AnonymousAuthenticationFilter>(headerAuthenticationFilter)
