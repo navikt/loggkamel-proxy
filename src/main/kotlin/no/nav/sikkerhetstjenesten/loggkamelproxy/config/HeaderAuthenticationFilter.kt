@@ -19,7 +19,7 @@ class HeaderAuthenticationFilter(
         response: HttpServletResponse,
         filterChain: FilterChain,
     ) {
-        val authenticationHeader = request.getHeader("Authentication")
+        val authenticationHeader = request.getHeader("Authorization")
 
         if (requestAuthenticationDecider.isRequestAuthenticated(authenticationHeader)) {
             val authentication = UsernamePasswordAuthenticationToken(
