@@ -7,6 +7,11 @@
       "name": "azure-token-generator",
       "namespace": "nais",
       "cluster": "dev-fss"
+    },
+    {
+      "name": "loggkamel",
+      "namespace": "sikkerhetstjenesten",
+      "cluster": "dev-gcp"
     }
   ],
   "nais": {
