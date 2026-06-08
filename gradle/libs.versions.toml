@@ -5,14 +5,12 @@ logback = "1.5.33"
 logstash = "9.0"
 junit-bom = "6.1.0"
 spring-boot = "4.0.6"
-spring-dependency = "1.1.7"
 swagger = "3.0.3"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin"}
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
-spring-dependency = { id = "io.spring.dependency-management", version.ref = "spring-dependency" }
 
 [libraries]
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
@@ -26,6 +24,8 @@ logstash = { module = "net.logstash.logback:logstash-logback-encoder", version.r
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" , version.ref = "spring-boot" }
 spring-boot-test = { module = "org.springframework.boot:spring-boot-test" , version.ref = "spring-boot" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" , version.ref = "spring-boot" }
+spring-boot-starter-secruity = { module = "org.springframework.boot:spring-boot-starter-security" , version.ref = "spring-boot" }
+spring-boot-starter-security-test = { module = "org.springframework.boot:spring-boot-starter-security-test" , version.ref = "spring-boot" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 spring-doc-openapi = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui" , version.ref = "swagger" }
 
@@ -41,7 +41,9 @@ logging = [
 springboot = [
     "spring-boot-starter-web",
     "spring-boot-test",
-    "spring-boot-starter-actuator"
+    "spring-boot-starter-actuator",
+    "spring-boot-starter-secruity",
+    "spring-boot-starter-security-test"
 ]
 kotlin = [
     "kotlin-reflect"
