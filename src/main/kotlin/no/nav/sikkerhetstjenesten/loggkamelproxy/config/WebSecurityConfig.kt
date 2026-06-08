@@ -26,7 +26,6 @@ class WebSecurityConfig(
                 authenticationEntryPoint = HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)
             }
             authorizeHttpRequests {
-                authorize("/monitoring/**", permitAll)
                 authorize(anyRequest, authenticated)
             }
         }

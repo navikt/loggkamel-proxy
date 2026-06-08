@@ -6,6 +6,7 @@ import org.springframework.core.env.Environment
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClient
+import org.springframework.web.client.body
 
 @Component
 class RequestAuthenticationDecider(
@@ -47,7 +48,7 @@ class RequestAuthenticationDecider(
             .accept(MediaType.APPLICATION_JSON)
             .body(Json.encodeToString(requestBody))
             .retrieve()
-            .body(AuthResponse::class.java)
+            .body<AuthResponse>()
             ?: run {
                 log.info("Token introspection endpoint returned an empty body")
                 return false

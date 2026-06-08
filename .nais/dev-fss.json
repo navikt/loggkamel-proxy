@@ -6,7 +6,7 @@
     {
       "name": "azure-token-generator",
       "namespace": "nais",
-      "cluster": "dev-fss"
+      "cluster": "dev-gcp"
     },
     {
       "name": "loggkamel",
