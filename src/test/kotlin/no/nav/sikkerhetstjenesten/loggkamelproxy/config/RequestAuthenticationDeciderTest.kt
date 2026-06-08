@@ -14,6 +14,8 @@ import java.util.concurrent.atomic.AtomicReference
 
 class RequestAuthenticationDeciderTest {
 
+    // TODO: go through existing tests, consider where to expand or correct
+
     private lateinit var server: HttpServer
 
     @BeforeEach

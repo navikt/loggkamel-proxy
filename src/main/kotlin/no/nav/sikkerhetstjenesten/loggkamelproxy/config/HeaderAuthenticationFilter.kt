@@ -38,6 +38,7 @@ class HeaderAuthenticationFilter(
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
         val path = request.servletPath
+        //TODO: here, skip filtering if you are hitting a /monitoring/ endpoint, or are running locally (need env utils)
         return path.startsWith("/monitoring/")
     }
 }

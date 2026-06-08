@@ -15,15 +15,13 @@ class RequestAuthenticationDecider(
     private val log = LoggerFactory.getLogger(javaClass)
     private val restClient = RestClient.create()
 
-    data class AuthResponse(val active: Boolean)
+    data class AuthResponse(val active: Boolean, val error: String?)
 
     fun isRequestAuthenticated(
         authenticationHeader: String?
     ): Boolean {
         //TODO: only for local development, remove before merging
         log.info("Authentication header is: $authenticationHeader")
-
-        //TODO: universal approval when the application is being run with a "local" profile
 
         if (authenticationHeader == null || !authenticationHeader.startsWith("Bearer ")) {
             log.info("Authentication attempted with missing or misformatted header")
@@ -57,6 +55,9 @@ class RequestAuthenticationDecider(
 
         //TODO: remove this debug logging, base approval on the "active" field of the response
         log.info("Token introspection response: {}", authenticationResponse.active)
+        if (!authenticationResponse.active) {
+            log.info("Cause for inactive token is ${authenticationResponse.error}")
+        }
 
         return true
     }
