@@ -31,7 +31,7 @@ dependencies {
 			because("Spring boot 4.0.6 pulls in a vulnerable version. REMOVE THIS ONCE HAVE AN UPDATED SPRING-BOOT-STARTER-WEB VERSION")
 		}
 
-		implementation("io.netty:netty-codec-http:4.2.13.Final") {
+		implementation("io.netty:netty-codec-http:4.2.15.Final") {
 			because("ktor-server-netty-jvm:3.5.0 pulls in a vulnerable version. REMOVE THIS ONCE HAVE AN UPDATED ktor-server-netty-jvm VERSION")
 		}
 	}
