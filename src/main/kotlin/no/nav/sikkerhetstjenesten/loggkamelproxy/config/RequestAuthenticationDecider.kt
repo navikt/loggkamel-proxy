@@ -1,5 +1,6 @@
 package no.nav.sikkerhetstjenesten.loggkamelproxy.config
 
+import kotlinx.serialization.json.Json
 import org.slf4j.LoggerFactory
 import org.springframework.core.env.Environment
 import org.springframework.http.MediaType
@@ -14,11 +15,15 @@ class RequestAuthenticationDecider(
     private val log = LoggerFactory.getLogger(javaClass)
     private val restClient = RestClient.create()
 
+    data class AuthResponse(val active: Boolean)
+
     fun isRequestAuthenticated(
         authenticationHeader: String?
     ): Boolean {
         //TODO: only for local development, remove before merging
         log.info("Authentication header is: $authenticationHeader")
+
+        //TODO: universal approval when the application is being run with a "local" profile
 
         if (authenticationHeader == null || !authenticationHeader.startsWith("Bearer ")) {
             log.info("Authentication attempted with missing or misformatted header")
@@ -26,6 +31,8 @@ class RequestAuthenticationDecider(
         }
 
         val bearerToken = authenticationHeader.substringAfter("Bearer ")
+        //TODO: DEBUG, REMOVE AFTER DEV
+        log.info("Extracted bearer token: $bearerToken")
 
         //TODO: pull this variable out so it's not a magic string in the code body
         val tokenIntrospectionEndpoint = environment.getProperty("NAIS_TOKEN_INTROSPECTION_ENDPOINT")
@@ -34,23 +41,22 @@ class RequestAuthenticationDecider(
             return false
         }
 
+        val requestBody = mapOf("identity_provider" to "entra_id", "token" to bearerToken)
         //TODO: cast this as a map or json blob
-        val authenticationResponse: String = restClient.post()
+        val authenticationResponse: AuthResponse = restClient.post()
             .uri(tokenIntrospectionEndpoint)
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON)
-            .body("""{"identity_provider":"entra_id","token":"$bearerToken"}""")
+            .body(Json.encodeToString(requestBody))
             .retrieve()
-            .body(String::class.java)
+            .body(AuthResponse::class.java)
             ?: run {
                 log.info("Token introspection endpoint returned an empty body")
                 return false
             }
 
         //TODO: remove this debug logging, base approval on the "active" field of the response
-        log.info("Token introspection response: {}", authenticationResponse)
-
-
+        log.info("Token introspection response: {}", authenticationResponse.active)
 
         return true
     }

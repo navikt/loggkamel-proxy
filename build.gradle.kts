@@ -2,6 +2,7 @@ plugins {
 	alias(libs.plugins.kotlin.jvm)
 	alias(libs.plugins.kotlin.spring)
 	alias(libs.plugins.spring.boot)
+	kotlin("plugin.serialization") version "2.4.0" // TODO: determine desired plugin version
 	application
 }
 
@@ -24,6 +25,9 @@ dependencies {
 
 	testImplementation(platform(libs.junit.bom))
 	testImplementation(libs.bundles.test)
+
+	// TODO: set a version here, see where you can bundle it
+	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json")
 
 	constraints {
 		implementation("org.apache.tomcat.embed:tomcat-embed-core:11.0.22") {
