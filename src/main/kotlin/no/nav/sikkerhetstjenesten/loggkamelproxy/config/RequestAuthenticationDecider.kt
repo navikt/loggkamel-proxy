@@ -21,17 +21,12 @@ class RequestAuthenticationDecider(
     fun isRequestAuthenticated(
         authenticationHeader: String?
     ): Boolean {
-        //TODO: only for local development, remove before merging
-        log.info("Authentication header is: $authenticationHeader")
-
         if (authenticationHeader == null || !authenticationHeader.startsWith("Bearer ")) {
             log.info("Authentication attempted with missing or misformatted header")
             return false
         }
 
         val bearerToken = authenticationHeader.substringAfter("Bearer ")
-        //TODO: DEBUG, REMOVE AFTER DEV
-        log.info("Extracted bearer token: $bearerToken")
 
         //TODO: pull this variable out so it's not a magic string in the code body
         val tokenIntrospectionEndpoint = environment.getProperty("NAIS_TOKEN_INTROSPECTION_ENDPOINT")
@@ -41,7 +36,6 @@ class RequestAuthenticationDecider(
         }
 
         val requestBody = mapOf("identity_provider" to "entra_id", "token" to bearerToken)
-        //TODO: cast this as a map or json blob
         val authenticationResponse: AuthResponse = restClient.post()
             .uri(tokenIntrospectionEndpoint)
             .contentType(MediaType.APPLICATION_JSON)
@@ -54,13 +48,11 @@ class RequestAuthenticationDecider(
                 return false
             }
 
-        //TODO: remove this debug logging, base approval on the "active" field of the response
-        log.info("Token introspection response: {}", authenticationResponse.active)
         if (!authenticationResponse.active) {
-            log.info("Cause for inactive token is ${authenticationResponse.error}")
+            log.debug("Invalid token received, cause for invalid token is ${authenticationResponse.error}")
         }
 
-        return true
+        return authenticationResponse.active
     }
 }
 
