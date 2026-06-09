@@ -3,6 +3,8 @@ package no.nav.sikkerhetstjenesten.loggkamelproxy.config
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import no.nav.boot.conditionals.Cluster
+import no.nav.boot.conditionals.EnvUtil
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
@@ -38,8 +40,7 @@ class HeaderAuthenticationFilter(
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
         val path = request.servletPath
-        //TODO: here, skip filtering if you are hitting a /monitoring/ endpoint, or are running locally (need env utils)
-        return path.startsWith("/monitoring/")
+        return Cluster.currentCluster() == Cluster.LOCAL || path.startsWith("/monitoring/")
     }
 }
 

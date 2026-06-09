@@ -23,6 +23,8 @@ dependencies {
 	implementation(libs.bundles.kotlin)
 	implementation(libs.bundles.openapi)
 
+	implementation(libs.bundles.nav)
+
 	testImplementation(platform(libs.junit.bom))
 	testImplementation(libs.bundles.test)
 
