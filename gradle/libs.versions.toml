@@ -1,5 +1,6 @@
 [versions]
 kotlin = "2.3.21"
+kotlinx-serialization = "1.11.0"
 ktor = "3.5.0"
 logback = "1.5.33"
 logstash = "9.0"
@@ -9,6 +10,7 @@ swagger = "3.0.3"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin"}
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 
@@ -27,6 +29,7 @@ spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-
 spring-boot-starter-secruity = { module = "org.springframework.boot:spring-boot-starter-security" , version.ref = "spring-boot" }
 spring-boot-starter-security-test = { module = "org.springframework.boot:spring-boot-starter-security-test" , version.ref = "spring-boot" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 spring-doc-openapi = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui" , version.ref = "swagger" }
 
 [bundles]
@@ -46,7 +49,8 @@ springboot = [
     "spring-boot-starter-security-test"
 ]
 kotlin = [
-    "kotlin-reflect"
+    "kotlin-reflect",
+    "kotlinx-serialization"
 ]
 openapi = [
     "spring-doc-openapi"

@@ -35,8 +35,8 @@ jobs:
           config: |
             threat-models: local
 
-      - name: Gradle build (with lower kotlin version)
-        run: ./gradlew build -PkotlinVersion=2.3.20
+      - name: Gradle build
+        run: ./gradlew build
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@7211b7c8077ea37d8641b6271f6a365a22a5fbfa # v4.36.0
