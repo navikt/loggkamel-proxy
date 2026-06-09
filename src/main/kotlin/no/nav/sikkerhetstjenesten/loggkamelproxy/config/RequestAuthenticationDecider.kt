@@ -15,6 +15,8 @@ class RequestAuthenticationDecider(
 
     private val log = LoggerFactory.getLogger(javaClass)
     private val restClient = RestClient.create()
+    private val tokenIntrospectionEndpoint = environment.getProperty("NAIS_TOKEN_INTROSPECTION_ENDPOINT")
+    final val identityProvider = "entra_id"
 
     data class AuthResponse(val active: Boolean, val error: String?)
 
@@ -28,14 +30,12 @@ class RequestAuthenticationDecider(
 
         val bearerToken = authenticationHeader.substringAfter("Bearer ")
 
-        //TODO: pull this variable out so it's not a magic string in the code body
-        val tokenIntrospectionEndpoint = environment.getProperty("NAIS_TOKEN_INTROSPECTION_ENDPOINT")
         if (tokenIntrospectionEndpoint.isNullOrBlank()) {
-            log.info("NAIS_TOKEN_INTROSPECTION_ENDPOINT is missing")
+            log.info("Token introspection endpoint environment variable is missing")
             return false
         }
 
-        val requestBody = mapOf("identity_provider" to "entra_id", "token" to bearerToken)
+        val requestBody = mapOf("identity_provider" to identityProvider, "token" to bearerToken)
         val authenticationResponse: AuthResponse = restClient.post()
             .uri(tokenIntrospectionEndpoint)
             .contentType(MediaType.APPLICATION_JSON)

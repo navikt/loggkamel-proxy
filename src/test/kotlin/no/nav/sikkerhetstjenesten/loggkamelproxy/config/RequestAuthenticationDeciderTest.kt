@@ -2,19 +2,19 @@ package no.nav.sikkerhetstjenesten.loggkamelproxy.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.sun.net.httpserver.HttpServer
+import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 import org.springframework.mock.env.MockEnvironment
 import java.net.InetSocketAddress
 import java.util.concurrent.atomic.AtomicReference
 
 class RequestAuthenticationDeciderTest {
-
-    // TODO: go through existing tests, consider where to expand or correct
 
     private lateinit var server: HttpServer
 
@@ -28,8 +28,9 @@ class RequestAuthenticationDeciderTest {
         server.stop(0)
     }
 
-    @Test
-    fun `posts bearer token to introspection endpoint and returns true`() {
+    @ParameterizedTest
+    @ValueSource(booleans = [true, false])
+    fun `posts bearer token to introspection endpoint and returns introspection active value`(isAccepted: Boolean) {
         val requestMethod = AtomicReference<String>()
         val requestBody = AtomicReference<String>()
 
@@ -37,11 +38,12 @@ class RequestAuthenticationDeciderTest {
             requestMethod.set(exchange.requestMethod)
             requestBody.set(exchange.requestBody.bufferedReader().use { it.readText() })
 
-            val responseBody = """{"active":true,"subject":"123"}"""
+            val responseBodyAsMap = mapOf("active" to isAccepted)
+            val responseBodyAsString = Json.encodeToString(responseBodyAsMap)
             exchange.responseHeaders.add("Content-Type", "application/json")
-            exchange.sendResponseHeaders(200, responseBody.toByteArray().size.toLong())
+            exchange.sendResponseHeaders(200, responseBodyAsString.toByteArray().size.toLong())
             exchange.responseBody.use { outputStream ->
-                outputStream.write(responseBody.toByteArray())
+                outputStream.write(responseBodyAsString.toByteArray())
             }
             exchange.close()
         }
@@ -53,16 +55,16 @@ class RequestAuthenticationDeciderTest {
             MockEnvironment().withProperty("NAIS_TOKEN_INTROSPECTION_ENDPOINT", endpointUrl)
         )
 
-        assertTrue(decider.isRequestAuthenticated("Bearer my-token"))
-        assertEquals("POST", requestMethod.get())
+        val passedInToken = "my-token"
+        assertEquals(isAccepted, decider.isRequestAuthenticated("Bearer $passedInToken"))
 
         val requestJson = ObjectMapper().readTree(requestBody.get())
-        assertEquals("entra_id", requestJson["identity_provider"].asText())
-        assertEquals("my-token", requestJson["token"].asText())
+        assertEquals(decider.identityProvider, requestJson["identity_provider"].asText())
+        assertEquals(passedInToken, requestJson["token"].asText())
     }
 
     @Test
-    fun `returns false for missing bearer header`() {
+    fun `returns false for missing or invalid bearer token`() {
         val decider = RequestAuthenticationDecider(MockEnvironment())
 
         assertFalse(decider.isRequestAuthenticated(null))
