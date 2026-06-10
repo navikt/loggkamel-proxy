@@ -46,7 +46,8 @@ class NaisTokenIntrospector(private val environment: Environment,): OpaqueTokenI
             log.info("Auth response is $authenticationResponse")
 
             val authorities = listOf(SimpleGrantedAuthority("AUTHENTICATED_NAIS_SERVICE"))
-            DefaultOAuth2AuthenticatedPrincipal(authenticationResponse, authorities)
+            DefaultOAuth2AuthenticatedPrincipal(mapOf<String, String>("key" to "value"), authorities)
+//            DefaultOAuth2AuthenticatedPrincipal(authenticationResponse, authorities)
         }
 
     }
