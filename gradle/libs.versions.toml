@@ -1,6 +1,5 @@
 [versions]
 kotlin = "2.3.21"
-kotlinx-serialization = "1.11.0"
 jackson = "2.22.0"
 ktor = "3.5.0"
 logback = "1.5.33"
@@ -13,7 +12,6 @@ nav-boot-conditionals = "6.0.6"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin"}
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 
@@ -33,7 +31,6 @@ spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-
 spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" , version.ref = "spring-boot" }
 spring-boot-starter-security-test = { module = "org.springframework.boot:spring-boot-starter-security-test" , version.ref = "spring-boot" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
-kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 spring-doc-openapi = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui" , version.ref = "swagger" }
 nav-boot-conditionals = { module = "no.nav.boot:boot-conditionals", version.ref = "nav-boot-conditionals" }
@@ -59,7 +56,6 @@ springboot = [
 ]
 kotlin = [
     "kotlin-reflect",
-    "kotlinx-serialization",
     "jackson-module-kotlin"
 ]
 openapi = [

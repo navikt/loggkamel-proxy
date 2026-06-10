@@ -1,7 +1,6 @@
 package no.nav.sikkerhetstjenesten.loggkamelproxy.auth
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import kotlinx.serialization.json.Json
 import no.nav.boot.conditionals.Cluster
 import org.slf4j.LoggerFactory
 import org.springframework.core.env.Environment
@@ -9,6 +8,8 @@ import org.springframework.http.MediaType
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.oauth2.core.DefaultOAuth2AuthenticatedPrincipal
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal
+import org.springframework.security.oauth2.server.resource.introspection.BadOpaqueTokenException
+import org.springframework.security.oauth2.server.resource.introspection.OAuth2IntrospectionException
 import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector
 import org.springframework.web.client.RestClient
 import org.springframework.web.client.body
@@ -36,7 +37,7 @@ class NaisTokenIntrospector(
 
         if (tokenIntrospectionEndpoint.isNullOrBlank()) {
             log.error("Token introspection endpoint environment variable is missing")
-            return null
+            throw OAuth2IntrospectionException("Token introspection endpoint environment variable is missing")
         }
 
         val requestBody = mapOf("identity_provider" to entraIdAsIdentityProvider, "token" to bearer)
@@ -44,19 +45,19 @@ class NaisTokenIntrospector(
             .uri(tokenIntrospectionEndpoint)
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON)
-            .body(Json.encodeToString(requestBody))
+            .body(mapper.writeValueAsString(requestBody))
             .retrieve()
             .body<EntraAuthenticationResponse>()
             ?: run {
                 log.warn("Token introspection endpoint returned an empty body")
-                return null
+                throw OAuth2IntrospectionException("Token introspection endpoint returned an empty body")
             }
 
         return if (!authenticationResponse.active) {
             log.debug("Invalid token received, cause for invalid token is ${authenticationResponse.error}")
-            null
+            throw BadOpaqueTokenException("Invalid token received, cause for invalid token is ${authenticationResponse.error}")
         } else {
-            val authenticationResponseAsMap = mapper.convertValue(authenticationResponse, object : com.fasterxml.jackson.core.type.TypeReference<Map<String, Any>>() {})
+            val authenticationResponseAsMap = mapper.convertValue(authenticationResponse, object : com.fasterxml.jackson.core.type.TypeReference<Map<String, Any?>>() {})
             DefaultOAuth2AuthenticatedPrincipal(authenticationResponseAsMap, grantedAuthorities)
         }
     }

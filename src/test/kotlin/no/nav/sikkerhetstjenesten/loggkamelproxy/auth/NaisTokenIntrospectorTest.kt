@@ -6,9 +6,11 @@ import no.nav.boot.conditionals.Cluster
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
-import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.springframework.mock.env.MockEnvironment
+import org.springframework.security.oauth2.server.resource.introspection.BadOpaqueTokenException
+import org.springframework.security.oauth2.server.resource.introspection.OAuth2IntrospectionException
 import org.springframework.web.client.RestClient
 import java.net.InetSocketAddress
 
@@ -35,38 +37,38 @@ class NaisTokenIntrospectorTest {
     }
 
     @Test
-    fun `returns null when introspection endpoint is missing`() {
+    fun `throws BadOpaqueTokenException when introspection endpoint is missing`() {
         val introspector = createIntrospector(environment = MockEnvironment(), cluster = Cluster.PROD_FSS)
 
-        val principal = introspector.introspect("bearer-token")
-
-        assertNull(principal)
+        assertThrows(OAuth2IntrospectionException::class.java) {
+            introspector.introspect("bearer-token")
+        }
     }
 
     @Test
-    fun `returns null when authentication response body is empty`() {
+    fun `throws BadOpaqueTokenException when authentication response body is empty`() {
         val endpointUrl = startServerWithNoContent()
         val introspector = createIntrospector(
             environment = MockEnvironment().withProperty("NAIS_TOKEN_INTROSPECTION_ENDPOINT", endpointUrl),
             cluster = Cluster.PROD_FSS
         )
 
-        val principal = introspector.introspect("bearer-token")
-
-        assertNull(principal)
+        assertThrows(OAuth2IntrospectionException::class.java) {
+            introspector.introspect("bearer-token")
+        }
     }
 
     @Test
-    fun `returns null when authentication response is not active`() {
+    fun `throws BadOpaqueTokenException when authentication response is not active`() {
         val endpointUrl = startServerWithJson(mapOf("active" to false, "error" to "invalid_token", "roles" to listOf("role-a")))
         val introspector = createIntrospector(
             environment = MockEnvironment().withProperty("NAIS_TOKEN_INTROSPECTION_ENDPOINT", endpointUrl),
             cluster = Cluster.PROD_FSS
         )
 
-        val principal = introspector.introspect("bearer-token")
-
-        assertNull(principal)
+        assertThrows(BadOpaqueTokenException::class.java) {
+            introspector.introspect("bearer-token")
+        }
     }
 
     @Test
