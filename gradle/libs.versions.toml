@@ -1,10 +1,12 @@
 [versions]
 kotlin = "2.3.21"
 kotlinx-serialization = "1.11.0"
+jackson = "2.22.0"
 ktor = "3.5.0"
 logback = "1.5.33"
 logstash = "9.0"
 junit-bom = "6.1.0"
+spring-security = "7.0.5"
 spring-boot = "4.0.6"
 swagger = "3.0.3"
 nav-boot-conditionals = "6.0.6"
@@ -24,6 +26,7 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 logstash = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash" }
+spring-security = { module = "org.springframework.security:spring-security-oauth2-resource-server" , version.ref = "spring-security" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" , version.ref = "spring-boot" }
 spring-boot-test = { module = "org.springframework.boot:spring-boot-test" , version.ref = "spring-boot" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" , version.ref = "spring-boot" }
@@ -31,6 +34,7 @@ spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-
 spring-boot-starter-security-test = { module = "org.springframework.boot:spring-boot-starter-security-test" , version.ref = "spring-boot" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 spring-doc-openapi = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui" , version.ref = "swagger" }
 nav-boot-conditionals = { module = "no.nav.boot:boot-conditionals", version.ref = "nav-boot-conditionals" }
 
@@ -43,6 +47,9 @@ logging = [
     "logback",
     "logstash"
 ]
+spring = [
+    "spring-security"
+]
 springboot = [
     "spring-boot-starter-web",
     "spring-boot-test",
@@ -52,7 +59,8 @@ springboot = [
 ]
 kotlin = [
     "kotlin-reflect",
-    "kotlinx-serialization"
+    "kotlinx-serialization",
+    "jackson-module-kotlin"
 ]
 openapi = [
     "spring-doc-openapi"

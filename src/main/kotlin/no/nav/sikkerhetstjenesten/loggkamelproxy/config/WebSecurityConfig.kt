@@ -1,7 +1,6 @@
 package no.nav.sikkerhetstjenesten.loggkamelproxy.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import no.nav.sikkerhetstjenesten.loggkamelproxy.auth.NaisTokenIntrospector
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -17,16 +16,13 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint
 
 @Configuration
 @EnableWebSecurity
-class WebSecurityConfig(
-    private val headerAuthenticationFilter: HeaderAuthenticationFilter,
-) {
+class WebSecurityConfig {
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http {
             formLogin { disable() }
             httpBasic { disable() }
-//            addFilterBefore<AnonymousAuthenticationFilter>(headerAuthenticationFilter)
             exceptionHandling {
                 authenticationEntryPoint = HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)
             }
@@ -46,11 +42,6 @@ class WebSecurityConfig(
     @Bean
     fun opaqueIntrospector(environment: Environment, mapper: ObjectMapper): OpaqueTokenIntrospector {
         return NaisTokenIntrospector(environment, mapper)
-    }
-
-    @Bean
-    fun objectMapper(): ObjectMapper {
-        return jacksonObjectMapper()
     }
 
 }
