@@ -26,7 +26,7 @@ dependencies {
 	implementation(libs.bundles.nav)
     // TODO: move over to libs file
 	implementation("org.springframework.security:spring-security-oauth2-resource-server:7.0.5")
-
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.22.0")
 	testImplementation(platform(libs.junit.bom))
 	testImplementation(libs.bundles.test)
 
