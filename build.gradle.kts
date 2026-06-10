@@ -24,6 +24,8 @@ dependencies {
 	implementation(libs.bundles.openapi)
 
 	implementation(libs.bundles.nav)
+    // TODO: move over to libs file
+	implementation("org.springframework.security:spring-security-oauth2-resource-server:7.0.5")
 
 	testImplementation(platform(libs.junit.bom))
 	testImplementation(libs.bundles.test)

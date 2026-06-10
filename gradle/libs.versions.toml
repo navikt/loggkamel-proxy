@@ -27,7 +27,7 @@ logstash = { module = "net.logstash.logback:logstash-logback-encoder", version.r
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" , version.ref = "spring-boot" }
 spring-boot-test = { module = "org.springframework.boot:spring-boot-test" , version.ref = "spring-boot" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" , version.ref = "spring-boot" }
-spring-boot-starter-secruity = { module = "org.springframework.boot:spring-boot-starter-security" , version.ref = "spring-boot" }
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" , version.ref = "spring-boot" }
 spring-boot-starter-security-test = { module = "org.springframework.boot:spring-boot-starter-security-test" , version.ref = "spring-boot" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
@@ -47,7 +47,7 @@ springboot = [
     "spring-boot-starter-web",
     "spring-boot-test",
     "spring-boot-starter-actuator",
-    "spring-boot-starter-secruity",
+    "spring-boot-starter-security",
     "spring-boot-starter-security-test"
 ]
 kotlin = [
