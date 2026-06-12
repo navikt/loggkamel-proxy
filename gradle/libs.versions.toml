@@ -1,18 +1,19 @@
 [versions]
 kotlin = "2.3.21"
+jackson = "2.22.0"
 ktor = "3.5.0"
 logback = "1.5.33"
 logstash = "9.0"
 junit-bom = "6.1.0"
+spring-security = "7.0.5"
 spring-boot = "4.0.6"
-spring-dependency = "1.1.7"
 swagger = "3.0.3"
+nav-boot-conditionals = "6.0.6"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin"}
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
-spring-dependency = { id = "io.spring.dependency-management", version.ref = "spring-dependency" }
 
 [libraries]
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
@@ -23,11 +24,16 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 logstash = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash" }
+spring-security = { module = "org.springframework.security:spring-security-oauth2-resource-server" , version.ref = "spring-security" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" , version.ref = "spring-boot" }
 spring-boot-test = { module = "org.springframework.boot:spring-boot-test" , version.ref = "spring-boot" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" , version.ref = "spring-boot" }
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" , version.ref = "spring-boot" }
+spring-boot-starter-security-test = { module = "org.springframework.boot:spring-boot-starter-security-test" , version.ref = "spring-boot" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 spring-doc-openapi = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui" , version.ref = "swagger" }
+nav-boot-conditionals = { module = "no.nav.boot:boot-conditionals", version.ref = "nav-boot-conditionals" }
 
 [bundles]
 ktor = [
@@ -38,16 +44,25 @@ logging = [
     "logback",
     "logstash"
 ]
+spring = [
+    "spring-security"
+]
 springboot = [
     "spring-boot-starter-web",
     "spring-boot-test",
-    "spring-boot-starter-actuator"
+    "spring-boot-starter-actuator",
+    "spring-boot-starter-security",
+    "spring-boot-starter-security-test"
 ]
 kotlin = [
-    "kotlin-reflect"
+    "kotlin-reflect",
+    "jackson-module-kotlin"
 ]
 openapi = [
     "spring-doc-openapi"
+]
+nav = [
+    "nav-boot-conditionals"
 ]
 
 test = [

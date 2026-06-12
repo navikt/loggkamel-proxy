@@ -2,23 +2,3 @@ logging:
   level:
     root: info
 
-# TODO: remove this configuration after you have proper spring profile loading in GCP
-management:
-  info:
-    git:
-      mode: simple
-  observations:
-    annotations:
-      enabled: true
-  health:
-    ssl:
-      enabled: false
-    ping:
-      enabled: false
-    diskspace:
-      enabled: false
-  endpoints:
-    web:
-      base-path: /monitoring
-      exposure:
-        include: health,info,prometheus

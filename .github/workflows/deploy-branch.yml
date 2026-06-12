@@ -24,7 +24,7 @@ jobs:
     needs: test-build-deploy
     strategy:
       matrix:
-        cluster: [ dev-gcp ]
+        cluster: [ dev-fss ]
     name: Deploy to ${{ matrix.cluster }}
     environment: ${{ matrix.cluster }}:sikkerhetstjenesten
     steps:

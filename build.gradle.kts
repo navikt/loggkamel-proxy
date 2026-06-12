@@ -2,7 +2,6 @@ plugins {
 	alias(libs.plugins.kotlin.jvm)
 	alias(libs.plugins.kotlin.spring)
 	alias(libs.plugins.spring.boot)
-	alias(libs.plugins.spring.dependency)
 	application
 }
 
@@ -18,10 +17,12 @@ kotlin {
 dependencies {
 	implementation(libs.bundles.ktor)
 	implementation(libs.bundles.logging)
-
+	implementation(libs.bundles.spring)
 	implementation(libs.bundles.springboot)
 	implementation(libs.bundles.kotlin)
 	implementation(libs.bundles.openapi)
+
+	implementation(libs.bundles.nav)
 
 	testImplementation(platform(libs.junit.bom))
 	testImplementation(libs.bundles.test)
