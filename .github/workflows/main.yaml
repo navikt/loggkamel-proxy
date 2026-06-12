@@ -22,7 +22,7 @@ jobs:
     needs: test-build-deploy
     strategy:
       matrix:
-        cluster: [ dev-fss ] #TODO: add prod-fss for prod deployment
+        cluster: [ dev-fss, prod-fss ]
     name: Deploy to ${{ matrix.cluster }}
     environment: ${{ matrix.cluster }}:sikkerhetstjenesten
     steps:
