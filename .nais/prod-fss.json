@@ -1,6 +1,7 @@
 {
   "ingresses": [
-    "https://loggkamel-proxy.intern.nav.no"
+    "https://loggkamel-proxy.intern.nav.no",
+    "https://loggkamel-proxy.prod-fss-pub.nais.io"
   ],
   "inbound": [
     {
