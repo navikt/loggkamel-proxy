@@ -5,47 +5,46 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.Table
 import java.time.LocalDateTime
 
 
 @Entity
+@Table(name = "CQM_SQLCODE_AUDIT")
 class QueryMonitorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
+    var id: Long? = null
 
     @Column(name = "METRICS_TIMESTAMP")
-    val metricsTimestamp: LocalDateTime? = null
+    var metricsTimestamp: LocalDateTime? = null
 
     @Column(name = "SMFID")
-    val smfId: String? = null
+    var smfId: String? = null
 
     @Column(name = "DATABASE_NAME")
-    val databaseName: String? = null
+    var databaseName: String? = null
 
     @Column(name = "PAGESET_NAME")
-    val pagesetName: String? = null
+    var pagesetName: String? = null
 
     @Column(name = "OBJECT_CREATOR")
-    val objectCreator: String? = null
+    var objectCreator: String? = null
 
     @Column(name = "OBJECT_NAME")
-    val objectName: String? = null
+    var objectName: String? = null
 
     @Column(name = "TBCREATOR")
-    val tbCreator: String? = null
+    var tbCreator: String? = null
 
     @Column(name = "TBNAME")
-    val tbName: String? = null
+    var tbName: String? = null
 
     @Column(name = "AUTHID")
-    val authId: String? = null
+    var authId: String? = null
 
     @Column(name = "SQLTEXT")
-    val sqlText: String? = null
-
-    //TODO: there will be an extra field here being added by kjell-anders for which kind of query this is
-
+    var sqlText: String? = null
 
 }
