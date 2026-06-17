@@ -2,6 +2,14 @@
 spring:
   mvc:
     log-request-details: true
+  datasource:
+    #TODO: populate username and password with secrets at runtime
+    url: jdbc:db2://localhost:50000/path-to-db-goes-here #TODO: fill this in with prod db connection info
+    username: db2admin
+    password: db2admin
+  jpa:
+    show-sql: true
+
 management:
   endpoint:
     env:
