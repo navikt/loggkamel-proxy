@@ -2,6 +2,13 @@
 spring:
   mvc:
     log-request-details: true
+  datasource:
+    url: jdbc:db2://155.55.1.82:5023/SYSTOOLS #TODO: confirm whether we want this (TDB2), or want to switch to QDB2
+    username: ${db2_username}
+    password: ${db2_password}
+  jpa:
+    show-sql: true
+
 management:
   endpoint:
     env:

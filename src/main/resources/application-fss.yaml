@@ -24,6 +24,13 @@ spring:
       enabled: true
   application:
     name: loggkamel-proxy
+  datasource:
+    driver-class-name: com.ibm.db2.jcc.DB2Driver
+  jpa:
+    database-platform: org.hibernate.dialect.DB2Dialect
+    hibernate:
+        ddl-auto: validate
+    show-sql: false
 
 springdoc:
   swagger-ui:

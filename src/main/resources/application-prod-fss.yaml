@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:db2://155.55.1.78:5021/SYSTOOLS
+    username: ${db2_username}
+    password: ${db2_password}

@@ -54,3 +54,5 @@ spec:
   env:
     - name: NAIS_CLUSTER_TYPE
       value: {{nais.cluster.type}}
+  envFrom:
+    - secret: db2-auth
