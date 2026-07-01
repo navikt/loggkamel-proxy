@@ -2,7 +2,7 @@
 kotlin = "2.3.21"
 jackson = "2.22.0"
 ktor = "3.5.1"
-logback = "1.5.36"
+logback = "1.5.37"
 logstash = "9.0"
 junit-bom = "6.1.0"
 spring-security = "7.0.5"
