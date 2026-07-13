@@ -1,14 +1,14 @@
 [versions]
 kotlin = "2.3.21"
-jackson = "2.22.0"
-ktor = "3.5.0"
-logback = "1.5.33"
+jackson = "2.22.1"
+ktor = "3.5.1"
+logback = "1.5.37"
 logstash = "9.0"
-junit-bom = "6.1.0"
+junit-bom = "6.1.1"
 spring-security = "7.0.5"
 spring-boot = "4.1.0"
 swagger = "3.0.3"
-nav-boot-conditionals = "6.0.6"
+nav-boot-conditionals = "6.0.7"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
