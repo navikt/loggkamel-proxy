@@ -57,5 +57,5 @@ spec:
   envFrom:
     - secret: db2-auth
   filesFrom:
-    - mountPath: /app/lib
+    - mountPath: /app/lib/lkjasdlkfj
       secret: db2-license
