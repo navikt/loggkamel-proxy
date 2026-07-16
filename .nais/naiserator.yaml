@@ -56,6 +56,6 @@ spec:
       value: {{nais.cluster.type}}
   envFrom:
     - secret: db2-auth
-#  filesFrom:
-#    - secret: db2-license
-#      mountPath: /app/lib
+  filesFrom:
+    - mountPath: /app/lib
+      secret: db2-license
