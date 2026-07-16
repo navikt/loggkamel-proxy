@@ -34,7 +34,7 @@ jobs:
       - uses: nais/deploy/actions/deploy@7c152a10f4da3ca352d57a25eba0b3a8e04882f9 # Deploy
         env:
           PRINT_PAYLOAD: true
-          RESOURCE: .nais/naiserator.yaml
+          RESOURCE: .nais/naiserator.yaml, .nais/job.yaml
           CLUSTER: ${{ matrix.cluster }}
           VARS: .nais/${{matrix.cluster}}.json
           IMAGE: ${{ needs.test-build-deploy.outputs.image }}
