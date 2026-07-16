@@ -11,8 +11,5 @@ dependencyResolutionManagement {
         maven {
             url = uri("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
         }
-        maven {
-            url = uri("https://repo.adeo.no/repository/nexus2-m2internal/")
-        }
     }
 }
