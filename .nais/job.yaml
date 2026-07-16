@@ -17,4 +17,4 @@ spec:
   webproxy: true
   filesFrom:
     - secret: db2-license
-      mountPath: /var/run/secrets/db2-license
+      mountPath: /app/lib
