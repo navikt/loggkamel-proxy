@@ -31,7 +31,6 @@ dependencies {
 	runtimeOnly("com.ibm.db2.jcc:db2jcc:db2jcc4")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa:4.1.0")
 
-
 	constraints {
 		// Pin non-vulnerable versions here
 	}
