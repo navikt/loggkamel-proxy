@@ -33,7 +33,8 @@ dependencies {
 	//TODO: move to versions document
 	runtimeOnly("com.ibm.db2.jcc:db2jcc:db2jcc4")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa:4.1.0")
-	runtimeOnly(files("/var/run/secrets/db2license/db2jcc_license_cisuz.jar"))
+	runtimeOnly(files("/var/run/secrets/db2-license/db2jcc_license_cisuz.jar"))
+	runtimeOnly(files("/var/run/secrets/db2-license/db2jcc_license_cisuz/db2jcc_license_cisuz.jar"))
 
 	constraints {
 		// Pin non-vulnerable versions here
