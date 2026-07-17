@@ -4,4 +4,4 @@ WORKDIR /app
 
 COPY build/install/app/ /app/
 
-ENTRYPOINT ["java", "-cp", "/app/lib/*:/var/run/secrets/db2_license/db2jcc_license_cisuz.jar", "no.nav.sikkerhetstjenesten.loggkamelproxy.LoggkamelProxyKt"]
+ENTRYPOINT ["java", "-cp", "/app/lib/*:/var/run/secrets/db2-license/*", "no.nav.sikkerhetstjenesten.loggkamelproxy.LoggkamelProxyKt"]
