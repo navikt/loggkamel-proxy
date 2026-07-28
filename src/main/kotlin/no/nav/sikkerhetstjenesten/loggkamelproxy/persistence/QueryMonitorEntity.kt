@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 
 
 @Entity
-@Table(name = "CQM_SQLCODE_AUDIT")
+@Table(name = "SYSTOOLS.CQM_SQLCODE_AUDIT")
 class QueryMonitorEntity {
 
     @Id
