@@ -5,14 +5,17 @@ import jakarta.persistence.Embeddable
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
+import kotlinx.serialization.Contextual
 import org.hibernate.annotations.Immutable
 import java.io.Serializable
 import java.time.LocalDateTime
 
 
 @Embeddable
+@kotlinx.serialization.Serializable
 data class QueryMonitorId(
     @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false)
+    @Contextual
     var metricsTimestamp: LocalDateTime? = null,
 
     @Column(name = "DATABASE_NAME", insertable = false, updatable = false)
@@ -37,6 +40,7 @@ class QueryMonitorEntity {
     var id: QueryMonitorId? = null
 
     @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false)
+    @Contextual
     var metricsTimestamp: LocalDateTime? = null
 
     @Column(name = "DATABASE_NAME", insertable = false, updatable = false)

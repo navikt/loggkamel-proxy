@@ -3,7 +3,7 @@ plugins {
 	alias(libs.plugins.kotlin.spring)
 	alias(libs.plugins.spring.boot)
 	//TODO: declare via alias
-	kotlin("plugin.serialization") version "2.4.10"
+	kotlin("plugin.serialization") version "2.3.21"
 	application
 }
 
@@ -36,6 +36,7 @@ dependencies {
 	runtimeOnly("com.ibm.db2.jcc:db2jcc:db2jcc4")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa:4.1.0")
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
+	implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.8.0")
 
 	constraints {
 		// Pin non-vulnerable versions here
