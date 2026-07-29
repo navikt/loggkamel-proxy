@@ -11,7 +11,7 @@ class QueryMonitorAdapterImpl(val queryMonitorRepository: QueryMonitorRepository
 
     fun QueryMonitorEntity.toAuditloggLineDTO(): AuditloggLineDTO {
         return AuditloggLineDTO(
-            this.metricsTimestamp, this.databaseName, this.tbName, this.authId, this.sqlText
+            this.id?.metricsTimestamp, this.id?.databaseName, this.tbName, this.authId, this.id?.sqlText
         )
     }
 
