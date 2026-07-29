@@ -1,14 +1,30 @@
 package no.nav.sikkerhetstjenesten.loggkamelproxy.persistence
 
 import jakarta.persistence.Column
+import jakarta.persistence.Embeddable
+import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
-import jakarta.persistence.Id
 import jakarta.persistence.Table
-import jakarta.persistence.Transient
 import org.hibernate.annotations.Immutable
-import org.hibernate.annotations.NaturalId
+import java.io.Serializable
 import java.time.LocalDateTime
-import java.util.UUID
+
+
+@Embeddable
+data class QueryMonitorId(
+    @Column(name = "METRICS_TIMESTAMP")
+    var metricsTimestamp: LocalDateTime? = null,
+
+    @Column(name = "DATABASE_NAME")
+    var databaseName: String? = null,
+
+    @Column(name = "SQLTEXT")
+    var sqlText: String? = null
+) : Serializable {
+    companion object {
+        private const val serialVersionUID = 1L
+    }
+}
 
 
 @Entity
@@ -16,20 +32,11 @@ import java.util.UUID
 @Immutable
 class QueryMonitorEntity {
 
-    @Id
-//    @Transient
-    var syntheticId: UUID = UUID.randomUUID()
-
-    @NaturalId
-    @Column(name = "METRICS_TIMESTAMP")
-    var metricsTimestamp: LocalDateTime? = null
+    @EmbeddedId
+    var id: QueryMonitorId? = null
 
     @Column(name = "SMFID")
     var smfId: String? = null
-
-    @NaturalId
-    @Column(name = "DATABASE_NAME")
-    var databaseName: String? = null
 
     @Column(name = "PAGESET_NAME")
     var pagesetName: String? = null
@@ -48,9 +55,5 @@ class QueryMonitorEntity {
 
     @Column(name = "AUTHID")
     var authId: String? = null
-
-    @NaturalId
-    @Column(name = "SQLTEXT")
-    var sqlText: String? = null
 
 }
