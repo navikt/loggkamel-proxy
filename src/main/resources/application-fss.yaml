@@ -32,7 +32,10 @@ spring:
         ddl-auto: validate
     show-sql: false
     properties:
-      hibernate.dialect: org.hibernate.dialect.DB2390Dialect
+      hibernate:
+        dialect: org.hibernate.dialect.DB2zDialect
+        id:
+          new_generator_mappings: false
 
 springdoc:
   swagger-ui:
