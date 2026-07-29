@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import kotlin.time.Instant
+import java.time.Instant
+import kotlin.time.toKotlinInstant
 
 @RestController
 @RequestMapping("/v1/auditlogg")
@@ -26,6 +27,6 @@ class AuditloggController(val auditloggService: AuditloggService) {
         log.info("logStarttime as instant: $logStartTime")
         log.info("logEndtime as instant: $logEndTime")
 
-        return auditloggService.getLogglinesByDatabaseAndTimePeriod(databaseName, logStartTime, logEndTime)
+        return auditloggService.getLogglinesByDatabaseAndTimePeriod(databaseName, logStartTime.toKotlinInstant(), logEndTime.toKotlinInstant())
     }
 }
