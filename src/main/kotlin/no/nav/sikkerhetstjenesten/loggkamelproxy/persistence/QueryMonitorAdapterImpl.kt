@@ -6,6 +6,7 @@ import no.nav.sikkerhetstjenesten.loggkamelproxy.rest.dto.AuditloggLineDTO
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import kotlin.time.Instant
+import kotlin.time.toJavaInstant
 
 @Component
 @ConditionalOnFSS
@@ -23,6 +24,9 @@ class QueryMonitorAdapterImpl(val queryMonitorRepository: QueryMonitorRepository
                                                      logStartTime: Instant,
                                                      logEndTime: Instant,
     ): List<AuditloggLineDTO> {
+        log.info("About to make request to repository")
+        logStartTime.toJavaInstant()
+
         val logglinesAsDatabaseEntities = queryMonitorRepository.findAllByDatabaseNameAndMetricsTimestampBetween(databaseName, logStartTime, logEndTime)
 
         log.info("Found ${logglinesAsDatabaseEntities.size} logglines")

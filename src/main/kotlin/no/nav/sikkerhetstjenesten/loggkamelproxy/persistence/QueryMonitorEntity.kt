@@ -13,7 +13,7 @@ import kotlin.time.Instant
 @Embeddable
 @kotlinx.serialization.Serializable
 data class QueryMonitorId(
-    @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false)
+    @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
     var metricsTimestamp: Instant? = null,
 
     @Column(name = "DATABASE_NAME", insertable = false, updatable = false)
@@ -37,7 +37,7 @@ class QueryMonitorEntity {
     @EmbeddedId
     var id: QueryMonitorId? = null
 
-    @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false)
+    @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
     var metricsTimestamp: Instant? = null
 
     @Column(name = "DATABASE_NAME", insertable = false, updatable = false)
