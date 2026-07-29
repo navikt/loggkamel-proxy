@@ -17,7 +17,7 @@ import java.util.UUID
 class QueryMonitorEntity {
 
     @Id
-    @Transient
+//    @Transient
     var syntheticId: UUID = UUID.randomUUID()
 
     @NaturalId
