@@ -30,6 +30,7 @@ data class QueryMonitorId(
 @Entity
 @Table(name = "CQM_SQLCODE_AUDIT", schema = "SYSTOOLS")
 @Immutable
+@kotlinx.serialization.Serializable
 class QueryMonitorEntity {
 
     @EmbeddedId

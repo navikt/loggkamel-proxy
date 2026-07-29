@@ -1,5 +1,6 @@
 package no.nav.sikkerhetstjenesten.loggkamelproxy.persistence
 
+import kotlinx.serialization.json.Json
 import no.nav.boot.conditionals.ConditionalOnFSS
 import no.nav.sikkerhetstjenesten.loggkamelproxy.rest.dto.AuditloggLineDTO
 import org.slf4j.LoggerFactory
@@ -25,6 +26,7 @@ class QueryMonitorAdapterImpl(val queryMonitorRepository: QueryMonitorRepository
         val logglinesAsDatabaseEntities = queryMonitorRepository.findAllByDatabaseNameAndMetricsTimestampBetween(databaseName, logStartTime, logEndTime)
 
         log.info("Found ${logglinesAsDatabaseEntities.size} logglines")
+        log.info("First entry is: ${Json.encodeToString(logglinesAsDatabaseEntities.firstOrNull())}")
 
         return logglinesAsDatabaseEntities.map { it.toAuditloggLineDTO() }
     }
