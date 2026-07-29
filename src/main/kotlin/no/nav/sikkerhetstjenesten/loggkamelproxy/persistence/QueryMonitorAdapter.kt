@@ -1,12 +1,12 @@
 package no.nav.sikkerhetstjenesten.loggkamelproxy.persistence
 
 import no.nav.sikkerhetstjenesten.loggkamelproxy.rest.dto.AuditloggLineDTO
-import java.time.LocalDateTime
+import kotlin.time.Instant
 
 interface QueryMonitorAdapter {
 
     fun getLogglinesByDatabaseAndTimePeriod(databaseName: String,
-                                            logStartTime: LocalDateTime,
-                                            logEndTime: LocalDateTime,
+                                            logStartTime: Instant,
+                                            logEndTime: Instant,
     ): List<AuditloggLineDTO>
 }

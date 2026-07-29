@@ -1,5 +1,5 @@
 package no.nav.sikkerhetstjenesten.loggkamelproxy.rest.dto
 
-import java.time.LocalDateTime
+import kotlin.time.Instant
 
-class AuditloggLineDTO(metricsTimestamp: LocalDateTime ?= null, databaseName: String ?= null, tableName: String ?= null, authId: String ?= null, sqlQuery: String ?= null)
+class AuditloggLineDTO(metricsTimestamp: Instant ?= null, databaseName: String ?= null, tableName: String ?= null, authId: String ?= null, sqlQuery: String ?= null)

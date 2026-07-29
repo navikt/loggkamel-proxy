@@ -6,8 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDateTime
-import java.time.ZoneOffset
+import kotlin.time.Instant
 
 @RestController
 @RequestMapping("/v1/auditlogg")
@@ -18,12 +17,12 @@ class AuditloggController(val auditloggService: AuditloggService) {
     //TODO: manual test, confirm this takes these as part of the request body
     @PostMapping
     fun testEndpoint(databaseName: String,
-                     logStartTime: LocalDateTime,
-                     logEndTime: LocalDateTime,) : List<AuditloggLineDTO> {
+                     logStartTime: Instant,
+                     logEndTime: Instant,) : List<AuditloggLineDTO> {
 
         log.info("Request received with databaseName: $databaseName, logStartTime: $logStartTime, logEndTime: $logEndTime")
-        log.info("logStarttime as instant: ${logStartTime.toInstant(ZoneOffset.UTC)}")
-        log.info("logEndtime as instant: ${logEndTime.toInstant(ZoneOffset.UTC)}")
+        log.info("logStarttime as instant: $logStartTime")
+        log.info("logEndtime as instant: $logEndTime")
 
         return auditloggService.getLogglinesByDatabaseAndTimePeriod(databaseName, logStartTime, logEndTime)
     }
