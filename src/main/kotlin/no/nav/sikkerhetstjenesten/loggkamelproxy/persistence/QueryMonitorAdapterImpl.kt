@@ -9,21 +9,18 @@ import java.time.LocalDateTime
 @ConditionalOnFSS
 class QueryMonitorAdapterImpl(val queryMonitorRepository: QueryMonitorRepository) : QueryMonitorAdapter {
 
-//    fun QueryMonitorEntity.toAuditloggLineDTO(): AuditloggLineDTO {
-//        return AuditloggLineDTO(
-//            this.metricsTimestamp, this.databaseName, this.tbName, this.authId, this.sqlText
-//        )
-//    }
+    fun QueryMonitorEntity.toAuditloggLineDTO(): AuditloggLineDTO {
+        return AuditloggLineDTO(
+            this.metricsTimestamp, this.databaseName, this.tbName, this.authId, this.sqlText
+        )
+    }
 
     override fun getLogglinesByDatabaseAndTimePeriod(databaseName: String,
                                                      logStartTime: LocalDateTime,
                                                      logEndTime: LocalDateTime,
     ): List<AuditloggLineDTO> {
-        //TODO: only here for testing, remove and replace with real code
-        return listOf<AuditloggLineDTO> (AuditloggLineDTO(null, "blah", "blah", "blah", "blah"))
+        val logglinesAsDatabaseEntities = queryMonitorRepository.findAllByDatabaseNameAndMetricsTimestampBetween(databaseName, logStartTime, logEndTime)
 
-//        val logglinesAsDatabaseEntities = queryMonitorRepository.findAllByDatabaseNameAndMetricsTimestampBetween(databaseName, logStartTime, logEndTime)
-//
-//        return logglinesAsDatabaseEntities.map { it.toAuditloggLineDTO() }
+        return logglinesAsDatabaseEntities.map { it.toAuditloggLineDTO() }
     }
 }

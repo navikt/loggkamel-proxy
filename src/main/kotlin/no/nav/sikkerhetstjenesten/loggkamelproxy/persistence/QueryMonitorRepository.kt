@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface QueryMonitorRepository: JpaRepository<QueryMonitorEntity, Long> {
 
-//    fun findAllByDatabaseNameAndMetricsTimestampBetween(
-//        databaseName: String,
-//        logStartTime: LocalDateTime,
-//        logEndTime: LocalDateTime,
-//    ): List<QueryMonitorEntity>
+    fun findAllByDatabaseNameAndMetricsTimestampBetween(
+        databaseName: String,
+        logStartTime: LocalDateTime,
+        logEndTime: LocalDateTime,
+    ): List<QueryMonitorEntity>
 }
