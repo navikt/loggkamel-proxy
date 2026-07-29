@@ -13,9 +13,10 @@ import java.time.LocalDateTime
 @Table(name = "CQM_SQLCODE_AUDIT", schema = "SYSTOOLS")
 class QueryMonitorEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    var id: Long? = null
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    var id: Long? = null
 
     @Column(name = "METRICS_TIMESTAMP")
     var metricsTimestamp: LocalDateTime? = null
