@@ -24,8 +24,8 @@ class AuditloggController(val auditloggService: AuditloggService) {
                      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) logEndTime: Instant,) : List<AuditloggLineDTO> {
 
         log.info("Request received with databaseName: $databaseName, logStartTime: $logStartTime, logEndTime: $logEndTime")
-        log.info("logStarttime as instant: $logStartTime")
-        log.info("logEndtime as instant: $logEndTime")
+        log.info("logStarttime as instant: ${logStartTime.toKotlinInstant()}")
+        log.info("logEndtime as instant: ${logEndTime.toKotlinInstant()}")
 
         return auditloggService.getLogglinesByDatabaseAndTimePeriod(databaseName, logStartTime.toKotlinInstant(), logEndTime.toKotlinInstant())
     }

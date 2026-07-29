@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import kotlin.time.Instant
 import kotlin.time.toJavaInstant
+import kotlin.time.toKotlinInstant
 
 @Component
 @ConditionalOnFSS
@@ -16,7 +17,7 @@ class QueryMonitorAdapterImpl(val queryMonitorRepository: QueryMonitorRepository
 
     fun QueryMonitorEntity.toAuditloggLineDTO(): AuditloggLineDTO {
         return AuditloggLineDTO(
-            this.metricsTimestamp, this.databaseName, this.tbName, this.authId, this.sqlText
+            this.metricsTimestamp?.toKotlinInstant(), this.databaseName, this.tbName, this.authId, this.sqlText
         )
     }
 
