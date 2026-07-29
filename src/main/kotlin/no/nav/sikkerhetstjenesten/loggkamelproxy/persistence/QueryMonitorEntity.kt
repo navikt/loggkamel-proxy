@@ -35,6 +35,15 @@ class QueryMonitorEntity {
     @EmbeddedId
     var id: QueryMonitorId? = null
 
+    @Column(name = "METRICS_TIMESTAMP")
+    var metricsTimestamp: LocalDateTime? = null
+
+    @Column(name = "DATABASE_NAME")
+    var databaseName: String? = null
+
+    @Column(name = "SQLTEXT")
+    var sqlText: String? = null
+
     @Column(name = "SMFID")
     var smfId: String? = null
 
