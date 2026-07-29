@@ -2,6 +2,8 @@ package no.nav.sikkerhetstjenesten.loggkamelproxy.persistence
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.hibernate.annotations.Immutable
@@ -15,8 +17,10 @@ import java.util.UUID
 @Immutable
 class QueryMonitorEntity {
 
-    @Id  // Synthetic ID—just a placeholder for Hibernate's internal use
-    var syntheticId: UUID? = null
+    @Id
+    @Column(insertable = false, updatable = false)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var syntheticId: UUID = UUID.randomUUID()
 
     @NaturalId
     @Column(name = "METRICS_TIMESTAMP")
