@@ -2,10 +2,9 @@ package no.nav.sikkerhetstjenesten.loggkamelproxy.persistence
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import jakarta.persistence.Transient
 import org.hibernate.annotations.Immutable
 import org.hibernate.annotations.NaturalId
 import java.time.LocalDateTime
@@ -18,8 +17,7 @@ import java.util.UUID
 class QueryMonitorEntity {
 
     @Id
-    @Column(insertable = false, updatable = false)
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Transient
     var syntheticId: UUID = UUID.randomUUID()
 
     @NaturalId
