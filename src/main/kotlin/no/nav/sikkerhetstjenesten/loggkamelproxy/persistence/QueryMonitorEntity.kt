@@ -17,34 +17,34 @@ class QueryMonitorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-//    @Column(name = "METRICS_TIMESTAMP")
-//    var metricsTimestamp: LocalDateTime? = null
-//
-//    @Column(name = "SMFID")
-//    var smfId: String? = null
-//
-//    @Column(name = "DATABASE_NAME")
-//    var databaseName: String? = null
-//
-//    @Column(name = "PAGESET_NAME")
-//    var pagesetName: String? = null
-//
-//    @Column(name = "OBJECT_CREATOR")
-//    var objectCreator: String? = null
-//
-//    @Column(name = "OBJECT_NAME")
-//    var objectName: String? = null
-//
-//    @Column(name = "TBCREATOR")
-//    var tbCreator: String? = null
-//
-//    @Column(name = "TBNAME")
-//    var tbName: String? = null
-//
-//    @Column(name = "AUTHID")
-//    var authId: String? = null
-//
-//    @Column(name = "SQLTEXT")
-//    var sqlText: String? = null
+    @Column(name = "METRICS_TIMESTAMP")
+    var metricsTimestamp: LocalDateTime? = null
+
+    @Column(name = "SMFID")
+    var smfId: String? = null
+
+    @Column(name = "DATABASE_NAME")
+    var databaseName: String? = null
+
+    @Column(name = "PAGESET_NAME")
+    var pagesetName: String? = null
+
+    @Column(name = "OBJECT_CREATOR")
+    var objectCreator: String? = null
+
+    @Column(name = "OBJECT_NAME")
+    var objectName: String? = null
+
+    @Column(name = "TBCREATOR")
+    var tbCreator: String? = null
+
+    @Column(name = "TBNAME")
+    var tbName: String? = null
+
+    @Column(name = "AUTHID")
+    var authId: String? = null
+
+    @Column(name = "SQLTEXT")
+    var sqlText: String? = null
 
 }
