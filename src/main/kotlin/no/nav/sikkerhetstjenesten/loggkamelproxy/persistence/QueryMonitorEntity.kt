@@ -12,13 +12,13 @@ import java.time.LocalDateTime
 
 @Embeddable
 data class QueryMonitorId(
-    @Column(name = "METRICS_TIMESTAMP")
+    @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false)
     var metricsTimestamp: LocalDateTime? = null,
 
-    @Column(name = "DATABASE_NAME")
+    @Column(name = "DATABASE_NAME", insertable = false, updatable = false)
     var databaseName: String? = null,
 
-    @Column(name = "SQLTEXT")
+    @Column(name = "SQLTEXT", insertable = false, updatable = false)
     var sqlText: String? = null
 ) : Serializable {
     companion object {
@@ -35,13 +35,13 @@ class QueryMonitorEntity {
     @EmbeddedId
     var id: QueryMonitorId? = null
 
-    @Column(name = "METRICS_TIMESTAMP")
+    @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false)
     var metricsTimestamp: LocalDateTime? = null
 
-    @Column(name = "DATABASE_NAME")
+    @Column(name = "DATABASE_NAME", insertable = false, updatable = false)
     var databaseName: String? = null
 
-    @Column(name = "SQLTEXT")
+    @Column(name = "SQLTEXT", insertable = false, updatable = false)
     var sqlText: String? = null
 
     @Column(name = "SMFID")
