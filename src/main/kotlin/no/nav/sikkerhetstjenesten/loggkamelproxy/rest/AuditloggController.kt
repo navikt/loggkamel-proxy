@@ -15,6 +15,7 @@ class AuditloggController(val auditloggService: AuditloggService) {
 
     var log = LoggerFactory.getLogger(AuditloggController::class.java)
 
+    //TODO: implement pagination of responses, for cases where there are too many logs within the range
     @PostMapping
     fun getAuditloggsForDatabaseAndDateRange(databaseName: String,
                                              logStartTime: LocalDateTime,
@@ -23,6 +24,7 @@ class AuditloggController(val auditloggService: AuditloggService) {
         return auditloggService.getLogglinesByDatabaseAndTimePeriod(databaseName, logStartTime, logEndTime)
     }
 
+    //TODO: consider limiting to only existing in DEV, or removing entirely
     @GetMapping("/sample")
     fun getSampleAuditloggs(): List<AuditloggLineDTO> {
         return auditloggService.findFirst100()
