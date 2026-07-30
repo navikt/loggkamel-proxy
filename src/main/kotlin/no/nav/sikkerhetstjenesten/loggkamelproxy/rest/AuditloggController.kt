@@ -29,7 +29,7 @@ class AuditloggController(val auditloggService: AuditloggService) {
         return response
     }
 
-    @GetMapping
+    @GetMapping("/sample")
     fun getSampleAuditloggs(): List<AuditloggLineDTO> {
         return auditloggService.findFirst100()
     }
