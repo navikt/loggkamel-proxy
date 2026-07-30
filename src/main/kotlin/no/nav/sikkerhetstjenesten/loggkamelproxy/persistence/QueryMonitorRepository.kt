@@ -1,5 +1,6 @@
 package no.nav.sikkerhetstjenesten.loggkamelproxy.persistence
 
+import org.springframework.data.domain.Limit
 import org.springframework.data.jpa.repository.JpaRepository
 import java.time.LocalDateTime
 
@@ -11,5 +12,5 @@ interface QueryMonitorRepository: JpaRepository<QueryMonitorEntity, Long> {
         logEndTime: LocalDateTime,
     ): List<QueryMonitorEntity>
 
-    fun findFirst100(): List<QueryMonitorEntity>
+    fun findBy(limit: Limit): List<QueryMonitorEntity>
 }

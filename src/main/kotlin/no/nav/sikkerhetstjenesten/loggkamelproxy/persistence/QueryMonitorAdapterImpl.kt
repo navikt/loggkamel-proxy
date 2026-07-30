@@ -3,6 +3,7 @@ package no.nav.sikkerhetstjenesten.loggkamelproxy.persistence
 import no.nav.boot.conditionals.ConditionalOnFSS
 import no.nav.sikkerhetstjenesten.loggkamelproxy.rest.dto.AuditloggLineDTO
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Limit
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
@@ -36,6 +37,6 @@ class QueryMonitorAdapterImpl(val queryMonitorRepository: QueryMonitorRepository
     }
 
     override fun findFirst100(): List<AuditloggLineDTO> {
-        return queryMonitorRepository.findFirst100().map { it.toAuditloggLineDTO() }
+        return queryMonitorRepository.findBy(Limit.of(100)).map { it.toAuditloggLineDTO() }
     }
 }
