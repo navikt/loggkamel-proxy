@@ -58,7 +58,7 @@ class QueryMonitorEntity(
     @Column(name = "SQLTEXT", insertable = false, updatable = false, nullable = false)
     var sqlText: String,
 
-    @Column(name = "SMFID")
+    @Column(name = "SMFID", columnDefinition = "CHAR")
     var smfId: String? = null,
 
     @Column(name = "PAGESET_NAME", columnDefinition = "CHAR")
@@ -70,7 +70,7 @@ class QueryMonitorEntity(
     @Column(name = "OBJECT_NAME")
     var objectName: String? = null,
 
-    @Column(name = "TBCREATOR")
+    @Column(name = "TBCREATOR", columnDefinition = "CHAR")
     var tbCreator: String? = null,
 
     @field:NotBlank
