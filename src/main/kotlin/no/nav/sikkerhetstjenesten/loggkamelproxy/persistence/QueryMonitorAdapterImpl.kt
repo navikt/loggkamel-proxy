@@ -22,7 +22,7 @@ class QueryMonitorAdapterImpl(val queryMonitorRepository: QueryMonitorRepository
                                                      logStartTime: LocalDateTime,
                                                      logEndTime: LocalDateTime,
     ): List<AuditloggLineDTO> {
-        log.info("About to make request to repository")
+        log.info("About to make request to repository with databasename: $databaseName, logStartTime: $logStartTime, logEndTime: $logEndTime")
 
         val logglinesAsDatabaseEntities = queryMonitorRepository.findAllByDatabaseNameAndMetricsTimestampBetween(databaseName, logStartTime, logEndTime)
 

@@ -1,52 +1,47 @@
 plugins {
-	alias(libs.plugins.kotlin.jvm)
-	alias(libs.plugins.kotlin.spring)
-	alias(libs.plugins.spring.boot)
-	//TODO: declare via alias
-	kotlin("plugin.serialization") version "2.3.21"
-	application
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.spring.boot)
+    kotlin("plugin.jpa") version "2.3.21"
+    application
 }
 
 application {
-	mainClass.set("no.nav.sikkerhetstjenesten.loggkamelproxy.LoggkamelProxyKt")
-	applicationName = "app"
-//	configurations.runtimeClasspath.get().joinToString(separator = " ") {
-//		it.name
-//	}.plus(" /var/run/secrets/db2license/db2jcc_license_cisuz.jar")
+    mainClass.set("no.nav.sikkerhetstjenesten.loggkamelproxy.LoggkamelProxyKt")
+    applicationName = "app"
 }
 
 kotlin {
-	jvmToolchain(25)
+    jvmToolchain(25)
 }
 
 dependencies {
-	implementation(libs.bundles.ktor)
-	implementation(libs.bundles.logging)
-	implementation(libs.bundles.spring)
-	implementation(libs.bundles.springboot)
-	implementation(libs.bundles.kotlin)
-	implementation(libs.bundles.openapi)
+    implementation(libs.bundles.ktor)
+    implementation(libs.bundles.logging)
+    implementation(libs.bundles.spring)
+    implementation(libs.bundles.springboot)
+    implementation(libs.bundles.kotlin)
+    implementation(libs.bundles.openapi)
 
-	implementation(libs.bundles.nav)
+    implementation(libs.bundles.nav)
 
-	testImplementation(platform(libs.junit.bom))
-	testImplementation(libs.bundles.test)
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.bundles.test)
 
-	//TODO: move to versions document
-	runtimeOnly("com.ibm.db2.jcc:db2jcc:db2jcc4")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa:4.1.0")
-	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
+    //TODO: move to versions document
+    runtimeOnly("com.ibm.db2.jcc:db2jcc:db2jcc4")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:4.1.0")
 
-	constraints {
-		// Pin non-vulnerable versions here
-	}
+    constraints {
+        // Pin non-vulnerable versions here
+    }
 }
 
 tasks {
-	withType<Test> {
-		useJUnitPlatform()
-		testLogging {
-			showExceptions = true
-		}
-	}
+    withType<Test> {
+        useJUnitPlatform()
+        testLogging {
+            showExceptions = true
+        }
+    }
 }

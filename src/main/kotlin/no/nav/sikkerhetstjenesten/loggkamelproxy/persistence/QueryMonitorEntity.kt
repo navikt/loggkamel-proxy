@@ -5,6 +5,7 @@ import jakarta.persistence.Embeddable
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
+import jakarta.validation.constraints.NotBlank
 import org.hibernate.annotations.Immutable
 import java.io.Serializable
 import java.time.LocalDateTime
@@ -31,43 +32,55 @@ data class QueryMonitorId(
 @Entity
 @Table(name = "CQM_SQLCODE_AUDIT", schema = "SYSTOOLS")
 @Immutable
-class QueryMonitorEntity {
+class QueryMonitorEntity(
 
     @EmbeddedId
-    var id: QueryMonitorId? = null
+    var id: QueryMonitorId? = null,
 
-    @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
-    var metricsTimestamp: LocalDateTime? = null
+    @field:NotBlank
+    @Column(
+        name = "METRICS_TIMESTAMP",
+        insertable = false,
+        updatable = false,
+        columnDefinition = "TIMESTAMP",
+        nullable = false
+    )
+    var metricsTimestamp: LocalDateTime,
 
-    @Column(name = "DATABASE_NAME", insertable = false, updatable = false)
-    var databaseName: String? = null
+    @field:NotBlank
+    @Column(name = "DATABASE_NAME", insertable = false, updatable = false, nullable = false)
+    var databaseName: String,
 
-    @Column(name = "SQLTEXT", insertable = false, updatable = false)
-    var sqlText: String? = null
+    @field:NotBlank
+    @Column(name = "SQLTEXT", insertable = false, updatable = false, nullable = false)
+    var sqlText: String,
 
     @Column(name = "SMFID")
-    var smfId: String? = null
+    var smfId: String? = null,
 
     @Column(name = "PAGESET_NAME")
-    var pagesetName: String? = null
+    var pagesetName: String? = null,
 
     @Column(name = "OBJECT_CREATOR")
-    var objectCreator: String? = null
+    var objectCreator: String? = null,
 
     @Column(name = "OBJECT_NAME")
-    var objectName: String? = null
+    var objectName: String? = null,
 
     @Column(name = "TBCREATOR")
-    var tbCreator: String? = null
+    var tbCreator: String? = null,
 
-    @Column(name = "TBNAME")
-    var tbName: String? = null
+    @field:NotBlank
+    @Column(name = "TBNAME", nullable = false)
+    var tbName: String,
 
-    @Column(name = "AUTHID")
-    var authId: String? = null
+    @field:NotBlank
+    @Column(name = "AUTHID", nullable = false)
+    var authId: String
+) {
 
     override fun toString(): String {
-        val ts = metricsTimestamp?.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+        val ts = metricsTimestamp.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
         return "QueryMonitorEntity(" +
                 "metricsTimestamp=$ts, " +
                 "databaseName=$databaseName, " +
