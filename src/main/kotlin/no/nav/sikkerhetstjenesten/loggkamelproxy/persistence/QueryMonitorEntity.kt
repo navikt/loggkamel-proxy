@@ -61,10 +61,10 @@ class QueryMonitorEntity(
     @Column(name = "SMFID")
     var smfId: String? = null,
 
-    @Column(name = "PAGESET_NAME")
+    @Column(name = "PAGESET_NAME", columnDefinition = "CHAR")
     var pagesetName: String? = null,
 
-    @Column(name = "OBJECT_CREATOR")
+    @Column(name = "OBJECT_CREATOR", columnDefinition = "CHAR")
     var objectCreator: String? = null,
 
     @Column(name = "OBJECT_NAME")
