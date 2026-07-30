@@ -48,7 +48,7 @@ class QueryMonitorEntity(
     var metricsTimestamp: LocalDateTime,
 
     @field:NotBlank
-    @Column(name = "DATABASE_NAME", insertable = false, updatable = false, nullable = false)
+    @Column(name = "DATABASE_NAME", insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(8)")
     var databaseName: String,
 
     @field:NotBlank
@@ -75,7 +75,7 @@ class QueryMonitorEntity(
     var tbName: String,
 
     @field:NotBlank
-    @Column(name = "AUTHID", nullable = false)
+    @Column(name = "AUTHID", nullable = false, columnDefinition = "CHAR(8)")
     var authId: String
 ) {
 
