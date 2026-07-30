@@ -29,7 +29,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.DB2Dialect #TODO: check logs after successful deploy, confirm if we need to specify or can remove
     hibernate:
-        ddl-auto: none
+        ddl-auto: validate
     show-sql: false
     properties:
       hibernate:
