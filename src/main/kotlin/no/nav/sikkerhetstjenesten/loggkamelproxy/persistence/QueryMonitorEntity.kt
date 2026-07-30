@@ -8,7 +8,7 @@ import jakarta.persistence.Table
 import kotlinx.serialization.Contextual
 import org.hibernate.annotations.Immutable
 import java.io.Serializable
-import java.time.Instant
+import java.time.LocalDateTime
 
 
 @Embeddable
@@ -16,7 +16,7 @@ import java.time.Instant
 data class QueryMonitorId(
     @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
     @Contextual
-    var metricsTimestamp: Instant? = null,
+    var metricsTimestamp: LocalDateTime? = null,
 
     @Column(name = "DATABASE_NAME", insertable = false, updatable = false)
     var databaseName: String? = null,
@@ -41,7 +41,7 @@ class QueryMonitorEntity {
 
     @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
     @Contextual
-    var metricsTimestamp: Instant? = null
+    var metricsTimestamp: LocalDateTime? = null
 
     @Column(name = "DATABASE_NAME", insertable = false, updatable = false)
     var databaseName: String? = null

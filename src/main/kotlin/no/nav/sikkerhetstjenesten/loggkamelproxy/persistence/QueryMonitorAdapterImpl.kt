@@ -5,9 +5,7 @@ import no.nav.boot.conditionals.ConditionalOnFSS
 import no.nav.sikkerhetstjenesten.loggkamelproxy.rest.dto.AuditloggLineDTO
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
-import kotlin.time.Instant
-import kotlin.time.toJavaInstant
-import kotlin.time.toKotlinInstant
+import java.time.LocalDateTime
 
 @Component
 @ConditionalOnFSS
@@ -17,16 +15,15 @@ class QueryMonitorAdapterImpl(val queryMonitorRepository: QueryMonitorRepository
 
     fun QueryMonitorEntity.toAuditloggLineDTO(): AuditloggLineDTO {
         return AuditloggLineDTO(
-            this.metricsTimestamp?.toKotlinInstant(), this.databaseName, this.tbName, this.authId, this.sqlText
+            this.metricsTimestamp, this.databaseName, this.tbName, this.authId, this.sqlText
         )
     }
 
     override fun getLogglinesByDatabaseAndTimePeriod(databaseName: String,
-                                                     logStartTime: Instant,
-                                                     logEndTime: Instant,
+                                                     logStartTime: LocalDateTime,
+                                                     logEndTime: LocalDateTime,
     ): List<AuditloggLineDTO> {
         log.info("About to make request to repository")
-        logStartTime.toJavaInstant()
 
         val logglinesAsDatabaseEntities = queryMonitorRepository.findAllByDatabaseNameAndMetricsTimestampBetween(databaseName, logStartTime, logEndTime)
 

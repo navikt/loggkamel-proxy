@@ -1,13 +1,13 @@
 package no.nav.sikkerhetstjenesten.loggkamelproxy.persistence
 
 import org.springframework.data.jpa.repository.JpaRepository
-import kotlin.time.Instant
+import java.time.LocalDateTime
 
 interface QueryMonitorRepository: JpaRepository<QueryMonitorEntity, Long> {
 
     fun findAllByDatabaseNameAndMetricsTimestampBetween(
         databaseName: String,
-        logStartTime: Instant,
-        logEndTime: Instant,
+        logStartTime: LocalDateTime,
+        logEndTime: LocalDateTime,
     ): List<QueryMonitorEntity>
 }
