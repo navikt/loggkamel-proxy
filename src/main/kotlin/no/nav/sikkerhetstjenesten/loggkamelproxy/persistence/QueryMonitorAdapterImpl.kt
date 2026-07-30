@@ -23,15 +23,7 @@ class QueryMonitorAdapterImpl(val queryMonitorRepository: QueryMonitorRepository
                                                      logStartTime: LocalDateTime,
                                                      logEndTime: LocalDateTime,
     ): List<AuditloggLineDTO> {
-        log.debug("About to make request to repository with databasename: $databaseName, logStartTime: $logStartTime, logEndTime: $logEndTime")
-
         val logglinesAsDatabaseEntities = queryMonitorRepository.findAllByDatabaseNameAndMetricsTimestampBetween(databaseName, logStartTime, logEndTime)
-
-        log.debug("Found ${logglinesAsDatabaseEntities.size} logglines")
-        if (logglinesAsDatabaseEntities.isNotEmpty()) {
-            log.debug("First entry is: ${logglinesAsDatabaseEntities.first()}")
-            log.debug("First entry as a DTO: ${logglinesAsDatabaseEntities.first().toAuditloggLineDTO()}")
-        }
 
         return logglinesAsDatabaseEntities.map { it.toAuditloggLineDTO() }
     }

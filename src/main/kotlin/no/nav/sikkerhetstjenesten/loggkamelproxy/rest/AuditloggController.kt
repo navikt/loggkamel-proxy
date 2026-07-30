@@ -20,13 +20,7 @@ class AuditloggController(val auditloggService: AuditloggService) {
                                              logStartTime: LocalDateTime,
                                              logEndTime: LocalDateTime,) : List<AuditloggLineDTO> {
 
-        log.debug("Request received with databaseName: $databaseName, logStartTime: $logStartTime, logEndTime: $logEndTime")
-
-        var response = auditloggService.getLogglinesByDatabaseAndTimePeriod(databaseName, logStartTime, logEndTime)
-
-        log.debug("Response that gets to the controller: $response")
-
-        return response
+        return auditloggService.getLogglinesByDatabaseAndTimePeriod(databaseName, logStartTime, logEndTime)
     }
 
     @GetMapping("/sample")
