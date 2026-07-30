@@ -9,10 +9,12 @@ spring-security = "7.0.5"
 spring-boot = "4.1.0"
 swagger = "3.0.3"
 nav-boot-conditionals = "6.0.7"
+ibm-db2 = "db2jcc4"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin"}
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin"}
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 
 [libraries]
@@ -29,10 +31,12 @@ spring-boot-test = { module = "org.springframework.boot:spring-boot-test" , vers
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" , version.ref = "spring-boot" }
 spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" , version.ref = "spring-boot" }
 spring-boot-starter-security-test = { module = "org.springframework.boot:spring-boot-starter-security-test" , version.ref = "spring-boot" }
+spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa", version.ref = "spring.boot"}
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 spring-doc-openapi = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui" , version.ref = "swagger" }
 nav-boot-conditionals = { module = "no.nav.boot:boot-conditionals", version.ref = "nav-boot-conditionals" }
+ibm-db2 = { module = "com.ibm.db2.jcc:db2jcc", version.ref = "ibm-db2" }
 
 [bundles]
 ktor = [
@@ -50,7 +54,8 @@ springboot = [
     "spring-boot-test",
     "spring-boot-starter-actuator",
     "spring-boot-starter-security",
-    "spring-boot-starter-security-test"
+    "spring-boot-starter-security-test",
+    "spring-boot-starter-data-jpa"
 ]
 kotlin = [
     "kotlin-reflect",
@@ -61,6 +66,9 @@ openapi = [
 ]
 nav = [
     "nav-boot-conditionals"
+]
+ibm = [
+    "ibm-db2"
 ]
 
 test = [

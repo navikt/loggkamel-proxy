@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.spring)
     alias(libs.plugins.spring.boot)
-    kotlin("plugin.jpa") version "2.3.21"
+    alias(libs.plugins.kotlin.jpa)
     application
 }
 
@@ -28,9 +28,7 @@ dependencies {
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.bundles.test)
 
-    //TODO: move to versions document
-    runtimeOnly("com.ibm.db2.jcc:db2jcc:db2jcc4")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:4.1.0")
+    runtimeOnly(libs.bundles.ibm)
 
     constraints {
         // Pin non-vulnerable versions here
