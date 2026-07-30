@@ -21,6 +21,7 @@ data class QueryMonitorId(
     @Column(name = "DATABASE_NAME", insertable = false, updatable = false, columnDefinition = "CHAR(8)")
     var databaseName: String? = null,
 
+    @Lob
     @Column(name = "SQLTEXT", insertable = false, updatable = false)
     var sqlText: String? = null
 ) : Serializable {
