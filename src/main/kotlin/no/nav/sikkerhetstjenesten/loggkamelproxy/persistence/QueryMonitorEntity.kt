@@ -17,7 +17,7 @@ data class QueryMonitorId(
     @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
     var metricsTimestamp: LocalDateTime? = null,
 
-    @Column(name = "DATABASE_NAME", insertable = false, updatable = false)
+    @Column(name = "DATABASE_NAME", insertable = false, updatable = false, columnDefinition = "CHAR(8)")
     var databaseName: String? = null,
 
     @Column(name = "SQLTEXT", insertable = false, updatable = false)
