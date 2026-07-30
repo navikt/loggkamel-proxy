@@ -9,4 +9,6 @@ interface QueryMonitorAdapter {
                                             logStartTime: LocalDateTime,
                                             logEndTime: LocalDateTime,
     ): List<AuditloggLineDTO>
+
+    fun findFirst100(): List<AuditloggLineDTO>
 }

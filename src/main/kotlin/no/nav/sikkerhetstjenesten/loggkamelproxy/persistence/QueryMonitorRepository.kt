@@ -10,4 +10,6 @@ interface QueryMonitorRepository: JpaRepository<QueryMonitorEntity, Long> {
         logStartTime: LocalDateTime,
         logEndTime: LocalDateTime,
     ): List<QueryMonitorEntity>
+
+    fun findFirst100(): List<QueryMonitorEntity>
 }

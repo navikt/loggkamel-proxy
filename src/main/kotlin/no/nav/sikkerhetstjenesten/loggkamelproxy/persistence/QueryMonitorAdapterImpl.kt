@@ -22,16 +22,20 @@ class QueryMonitorAdapterImpl(val queryMonitorRepository: QueryMonitorRepository
                                                      logStartTime: LocalDateTime,
                                                      logEndTime: LocalDateTime,
     ): List<AuditloggLineDTO> {
-        log.info("About to make request to repository with databasename: $databaseName, logStartTime: $logStartTime, logEndTime: $logEndTime")
+        log.debug("About to make request to repository with databasename: $databaseName, logStartTime: $logStartTime, logEndTime: $logEndTime")
 
         val logglinesAsDatabaseEntities = queryMonitorRepository.findAllByDatabaseNameAndMetricsTimestampBetween(databaseName, logStartTime, logEndTime)
 
-        log.info("Found ${logglinesAsDatabaseEntities.size} logglines")
+        log.debug("Found ${logglinesAsDatabaseEntities.size} logglines")
         if (logglinesAsDatabaseEntities.isNotEmpty()) {
-            log.info("First entry is: ${logglinesAsDatabaseEntities.first()}")
-            log.info("First entry as a DTO: ${logglinesAsDatabaseEntities.first().toAuditloggLineDTO()}")
+            log.debug("First entry is: ${logglinesAsDatabaseEntities.first()}")
+            log.debug("First entry as a DTO: ${logglinesAsDatabaseEntities.first().toAuditloggLineDTO()}")
         }
 
         return logglinesAsDatabaseEntities.map { it.toAuditloggLineDTO() }
+    }
+
+    override fun findFirst100(): List<AuditloggLineDTO> {
+        return queryMonitorRepository.findFirst100().map { it.toAuditloggLineDTO() }
     }
 }

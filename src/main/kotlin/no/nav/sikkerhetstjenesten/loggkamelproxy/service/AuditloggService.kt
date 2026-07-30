@@ -14,4 +14,8 @@ class AuditloggService(val queryMonitorAdapter: QueryMonitorAdapter) {
     ): List<AuditloggLineDTO> {
         return queryMonitorAdapter.getLogglinesByDatabaseAndTimePeriod(databaseName, logStartTime, logEndTime)
     }
+
+    fun findFirst100(): List<AuditloggLineDTO> {
+        return queryMonitorAdapter.findFirst100()
+    }
 }
