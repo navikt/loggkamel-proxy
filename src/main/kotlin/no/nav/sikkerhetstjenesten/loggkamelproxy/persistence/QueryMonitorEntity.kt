@@ -4,6 +4,7 @@ import jakarta.persistence.Column
 import jakarta.persistence.Embeddable
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
+import jakarta.persistence.Lob
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotBlank
 import org.hibernate.annotations.Immutable
@@ -52,6 +53,7 @@ class QueryMonitorEntity(
     var databaseName: String,
 
     @field:NotBlank
+    @Lob
     @Column(name = "SQLTEXT", insertable = false, updatable = false, nullable = false)
     var sqlText: String,
 
