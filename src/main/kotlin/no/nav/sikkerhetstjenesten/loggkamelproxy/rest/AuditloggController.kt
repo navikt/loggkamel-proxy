@@ -24,6 +24,10 @@ class AuditloggController(val auditloggService: AuditloggService) {
 //        log.info("logStarttime as instant: ${logStartTime}")
 //        log.info("logEndtime as instant: ${logEndTime}")
 
-        return auditloggService.getLogglinesByDatabaseAndTimePeriod(databaseName, logStartTime, logEndTime)
+        var response = auditloggService.getLogglinesByDatabaseAndTimePeriod(databaseName, logStartTime, logEndTime)
+
+        log.info("Response that gets to the controller: $response")
+
+        return response
     }
 }
