@@ -28,7 +28,9 @@ class QueryMonitorAdapterImpl(val queryMonitorRepository: QueryMonitorRepository
         val logglinesAsDatabaseEntities = queryMonitorRepository.findAllByDatabaseNameAndMetricsTimestampBetween(databaseName, logStartTime, logEndTime)
 
         log.info("Found ${logglinesAsDatabaseEntities.size} logglines")
-        log.info("First entry is: ${Json.encodeToString(QueryMonitorEntity.serializer(), logglinesAsDatabaseEntities.first())}")
+        if (logglinesAsDatabaseEntities.isNotEmpty()) {
+            log.info("First entry is: ${logglinesAsDatabaseEntities.first()}")
+        }
 
         return logglinesAsDatabaseEntities.map { it.toAuditloggLineDTO() }
     }

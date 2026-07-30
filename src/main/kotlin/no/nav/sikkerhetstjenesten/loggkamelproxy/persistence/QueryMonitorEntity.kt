@@ -5,17 +5,15 @@ import jakarta.persistence.Embeddable
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
-import kotlinx.serialization.Contextual
 import org.hibernate.annotations.Immutable
 import java.io.Serializable
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 @Embeddable
-@kotlinx.serialization.Serializable
 data class QueryMonitorId(
     @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
-    @Contextual
     var metricsTimestamp: LocalDateTime? = null,
 
     @Column(name = "DATABASE_NAME", insertable = false, updatable = false)
@@ -33,14 +31,12 @@ data class QueryMonitorId(
 @Entity
 @Table(name = "CQM_SQLCODE_AUDIT", schema = "SYSTOOLS")
 @Immutable
-@kotlinx.serialization.Serializable
 class QueryMonitorEntity {
 
     @EmbeddedId
     var id: QueryMonitorId? = null
 
     @Column(name = "METRICS_TIMESTAMP", insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
-    @Contextual
     var metricsTimestamp: LocalDateTime? = null
 
     @Column(name = "DATABASE_NAME", insertable = false, updatable = false)
@@ -69,5 +65,16 @@ class QueryMonitorEntity {
 
     @Column(name = "AUTHID")
     var authId: String? = null
+
+    override fun toString(): String {
+        val ts = metricsTimestamp?.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+        return "QueryMonitorEntity(" +
+                "metricsTimestamp=$ts, " +
+                "databaseName=$databaseName, " +
+                "tbName=$tbName, " +
+                "authId=$authId, " +
+                "sqlText=$sqlText" +
+                ")"
+    }
 
 }
