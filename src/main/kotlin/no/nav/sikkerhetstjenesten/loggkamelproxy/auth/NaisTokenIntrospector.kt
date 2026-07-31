@@ -15,7 +15,7 @@ import org.springframework.web.client.RestClient
 import org.springframework.web.client.body
 
 class NaisTokenIntrospector(
-    private val environment: Environment,
+    environment: Environment,
     private val mapper: ObjectMapper,
     private val restClient: RestClient = RestClient.create(),
     private val clusterProvider: () -> Cluster = { Cluster.currentCluster() }
@@ -23,8 +23,8 @@ class NaisTokenIntrospector(
 
     private val log = LoggerFactory.getLogger(javaClass)
     private val tokenIntrospectionEndpoint = environment.getProperty("NAIS_TOKEN_INTROSPECTION_ENDPOINT")
-    final val entraIdAsIdentityProvider = "entra_id"
-    final val grantedAuthorities = listOf(SimpleGrantedAuthority("AUTHENTICATED_NAIS_SERVICE"))
+    val entraIdAsIdentityProvider = "entra_id"
+    val grantedAuthorities = listOf(SimpleGrantedAuthority("AUTHENTICATED_NAIS_SERVICE"))
 
     data class EntraAuthenticationResponse(val active: Boolean, val error: String?, val roles: List<String>?)
 

@@ -54,3 +54,8 @@ spec:
   env:
     - name: NAIS_CLUSTER_TYPE
       value: {{nais.cluster.type}}
+  envFrom:
+    - secret: db2-auth
+  filesFrom:
+    - secret: db2-license
+      mountPath: /var/run/secrets/db2-license
