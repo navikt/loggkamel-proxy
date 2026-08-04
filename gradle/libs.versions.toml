@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.4.10"
 jackson = "2.22.1"
-ktor = "3.5.1"
+ktor = "3.5.2"
 logback = "1.6.1"
 logstash = "9.0"
 junit-bom = "6.1.2"
