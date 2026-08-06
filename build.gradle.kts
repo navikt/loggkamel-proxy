@@ -23,6 +23,9 @@ dependencies {
     implementation(libs.bundles.kotlin)
     implementation(libs.bundles.openapi)
 
+    // Source: https://mvnrepository.com/artifact/org.springframework/spring-web
+    implementation("org.springframework:spring-web:7.0.8")
+
     implementation(libs.bundles.nav)
 
     testImplementation(platform(libs.junit.bom))

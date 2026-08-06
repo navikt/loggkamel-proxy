@@ -8,6 +8,7 @@ interface QueryMonitorAdapter {
     fun getLogglinesByDatabaseAndTimePeriod(databaseName: String,
                                             logStartTime: LocalDateTime,
                                             logEndTime: LocalDateTime,
+                                            packetSize: Int
     ): List<AuditloggLineDTO>
 
     fun findFirst100(): List<AuditloggLineDTO>
