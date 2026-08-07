@@ -6,6 +6,7 @@ logback = "1.6.1"
 logstash = "9.0"
 junit-bom = "6.1.2"
 spring-security = "7.0.5"
+spring-web = "7.0.8"
 spring-boot = "4.1.0"
 swagger = "3.1.0"
 nav-boot-conditionals = "6.0.7"
@@ -26,6 +27,7 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 logstash = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash" }
 spring-security = { module = "org.springframework.security:spring-security-oauth2-resource-server" , version.ref = "spring-security" }
+spring-web = { module = "org.springframework:spring-web" , version.ref = "spring-web" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" , version.ref = "spring-boot" }
 spring-boot-test = { module = "org.springframework.boot:spring-boot-test" , version.ref = "spring-boot" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" , version.ref = "spring-boot" }
@@ -47,7 +49,8 @@ logging = [
     "logstash"
 ]
 spring = [
-    "spring-security"
+    "spring-security",
+    "spring-web"
 ]
 springboot = [
     "spring-boot-starter-web",
