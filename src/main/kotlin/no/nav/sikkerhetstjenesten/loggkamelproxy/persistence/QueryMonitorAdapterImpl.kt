@@ -22,8 +22,9 @@ class QueryMonitorAdapterImpl(val queryMonitorRepository: QueryMonitorRepository
     override fun getLogglinesByDatabaseAndTimePeriod(databaseName: String,
                                                      logStartTime: LocalDateTime,
                                                      logEndTime: LocalDateTime,
+                                                     packetSize: Int
     ): List<AuditloggLineDTO> {
-        val logglinesAsDatabaseEntities = queryMonitorRepository.findAllByDatabaseNameAndMetricsTimestampBetween(databaseName, logStartTime, logEndTime)
+        val logglinesAsDatabaseEntities = queryMonitorRepository.findByDatabaseNameAndMetricsTimestampBetweenDatesLimitTo(databaseName, logStartTime, logEndTime, packetSize)
 
         return logglinesAsDatabaseEntities.map { it.toAuditloggLineDTO() }
     }

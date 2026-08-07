@@ -12,7 +12,8 @@ class QueryMonitorAdapterMock : QueryMonitorAdapter {
     override fun getLogglinesByDatabaseAndTimePeriod(
         databaseName: String,
         logStartTime: LocalDateTime,
-        logEndTime: LocalDateTime
+        logEndTime: LocalDateTime,
+        packetSize: Int
     ): List<AuditloggLineDTO> {
         return listOf(AuditloggLineDTO(
             LocalDateTime.now(),

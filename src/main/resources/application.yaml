@@ -2,3 +2,7 @@ logging:
   level:
     root: info
 
+spring:
+  web:
+    error:
+      include-message: always
