@@ -31,7 +31,12 @@ dependencies {
     runtimeOnly(libs.bundles.ibm)
 
     constraints {
-        // Pin non-vulnerable versions here
+        // Remove this constraint once spring-boot-starter-web includes tomcat-embed-core version 11.0.25 or higher
+        implementation("org.apache.tomcat.embed:tomcat-embed-core") {
+            version {
+                strictly("11.0.25")
+            }
+        }
     }
 }
 
