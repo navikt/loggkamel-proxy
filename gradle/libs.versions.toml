@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.4.10"
+kotlin = "2.4.20"
 jackson = "2.22.3"
 ktor = "3.6.0"
 logback = "1.6.3"
