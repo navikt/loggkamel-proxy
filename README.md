@@ -1,8 +1,8 @@
 # Loggkamel Proxy
 
-Tjenesten eksisterer for å lar [Loggkamel](https://github.com/navikt/loggkamel) overføre loggene fra on-prem DB2 databaser til sin egen logbøtter.
+Tjenesten gjør det mulig for [Loggkamel](https://github.com/navikt/loggkamel) å overføre logger fra on-prem DB2-databaser til egne loggbøtter.
 
-Eksponerer en par endpunkter for dette, som bare loggkamel har tilgang til.
+Tjenesten eksponerer et par endepunkter som bare Loggkamel har tilgang til.
 
 Endpunktene er i AuditloggController.
 
