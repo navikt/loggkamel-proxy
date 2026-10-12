@@ -33,7 +33,7 @@ class NaisTokenIntrospectorTest {
         val principal = introspector.introspect("bearer-token")
 
         assertNotNull(principal)
-        assertEquals("value", principal?.attributes?.get("key"))
+        assertEquals("value", principal.attributes["key"])
     }
 
     @Test
@@ -83,8 +83,8 @@ class NaisTokenIntrospectorTest {
         val principal = introspector.introspect("bearer-token")
 
         assertNotNull(principal)
-        assertEquals(true, principal?.attributes?.get("active"))
-        assertEquals(listOf("role-a", "role-b"), principal?.attributes?.get("roles"))
+        assertEquals(true, principal.attributes["active"])
+        assertEquals(listOf("role-a", "role-b"), principal.attributes["roles"])
     }
 
     private fun createIntrospector(environment: MockEnvironment, cluster: Cluster): NaisTokenIntrospector {
