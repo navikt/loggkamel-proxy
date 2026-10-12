@@ -28,7 +28,7 @@ class NaisTokenIntrospector(
 
     data class EntraAuthenticationResponse(val active: Boolean, val error: String?, val roles: List<String>?)
 
-    override fun introspect(bearer: String?): OAuth2AuthenticatedPrincipal? {
+    override fun introspect(bearer: String): OAuth2AuthenticatedPrincipal {
 
         if (clusterProvider() == Cluster.LOCAL) {
             log.error("Authentication being treated as running locally")
@@ -57,7 +57,7 @@ class NaisTokenIntrospector(
             log.debug("Invalid token received, cause for invalid token is ${authenticationResponse.error}")
             throw BadOpaqueTokenException("Invalid token received, cause for invalid token is ${authenticationResponse.error}")
         } else {
-            val authenticationResponseAsMap = mapper.convertValue(authenticationResponse, object : com.fasterxml.jackson.core.type.TypeReference<Map<String, Any?>>() {})
+            val authenticationResponseAsMap = mapper.convertValue(authenticationResponse, object : com.fasterxml.jackson.core.type.TypeReference<Map<String, Any>>() {})
             DefaultOAuth2AuthenticatedPrincipal(authenticationResponseAsMap, grantedAuthorities)
         }
     }
