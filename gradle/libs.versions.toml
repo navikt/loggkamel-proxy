@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.4.21"
-jackson = "2.22.3"
+jackson = "2.22.4"
 ktor = "3.6.0"
 logback = "1.6.6"
 logstash = "9.0"
