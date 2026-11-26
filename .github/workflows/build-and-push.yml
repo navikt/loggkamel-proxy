@@ -28,7 +28,7 @@ jobs:
       - name: Test & build
         run: ./gradlew test installDist
       - name: Build & push docker image + SBOM
-        uses: nais/docker-build-push@751a312f0803eb96a05a41fadf51be19b7be362c
+        uses: nais/docker-build-push@bfbdd06e303c63a7d697da6f391ffc6b81f60db2
         id: docker-push
         with:
           team: sikkerhetstjenesten
